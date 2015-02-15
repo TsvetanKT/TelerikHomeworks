@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>01.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>01.Write functions for working with shapes in  standard Planar coordinate system.</p>
+    <p>Points are represented by coordinates P(X, Y)</p>  
+    <p>Lines are represented by two points, marking their beginning and ending</p>  
+    <p>L(P1(X1,Y1), P2(X2,Y2))</p>    
+    <p>Calculate the distance between two points</p>    
+    <p>Check if three segment lines can form a triangle</p> 
+    <hr/>      
+    <p>Reload the page to generate another result.</p>
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        // Random coordinates every time.
+        var a = Math.floor((Math.random() * 10)),
+            b = Math.floor((Math.random() * 10)),
+            c = Math.floor((Math.random() * 10)),
+            d = Math.floor((Math.random() * 10)),
+            e = Math.floor((Math.random() * 10)),
+            f = Math.floor((Math.random() * 10)),
+            g = Math.floor((Math.random() * 10)),
+            h = Math.floor((Math.random() * 10)),
+            i = Math.floor((Math.random() * 10)),
+            j = Math.floor((Math.random() * 10)),
+            k = Math.floor((Math.random() * 10)),
+            l = Math.floor((Math.random() * 10));
+
+        var line1 = { Point1: { X: a, Y: b }, Point2: { X: c, Y: d} };
+        var line2 = { Point1: { X: e, Y: f }, Point2: { X: g, Y: h} };
+        var line3 = { Point1: { X: i, Y: j }, Point2: { X: k, Y: l} };
+
+        jsConsole.writeLine("The Distance between points of line 1 is:" +
+        Math.round(calculateDistanceTwoPoints(line1.Point1, line1.Point2) * 100) / 100);
+
+        jsConsole.writeLine("The Distance between points of line 2 is:" +
+        Math.round(calculateDistanceTwoPoints(line2.Point1, line2.Point2) * 100) / 100);
+
+        jsConsole.writeLine("The Distance between points of line 3 is:" +
+        Math.round(calculateDistanceTwoPoints(line3.Point1, line3.Point2) * 100) / 100);
+
+        jsConsole.write("Can the three lines form a triangle: ");
+        checkIfCanFormTriangel(line1, line2, line3);
+
+        function calculateDistanceTwoPoints(Point1, Point2) {
+            var distance = Math.sqrt((Point1.X - Point2.X) * (Point1.X - Point2.X) + (Point1.Y - Point2.Y) * (Point1.Y - Point2.Y));
+            return distance;
+        }
+
+        function checkIfCanFormTriangel(line1, line2, line3) {
+
+            var line1Len = calculateDistanceTwoPoints(line1.Point1, line1.Point2);
+            var line2Len = calculateDistanceTwoPoints(line2.Point1, line2.Point2);
+            var line3Len = calculateDistanceTwoPoints(line3.Point1, line3.Point2);
+
+            if (line1Len < line2Len + line3Len && line2Len < line1Len + line3Len && line3Len < line2Len + line1Len) {
+                jsConsole.write("True");
+            }
+
+            else {
+                jsConsole.write("False");
+            }
+        }     
+    </script>
+</body>
+</html>

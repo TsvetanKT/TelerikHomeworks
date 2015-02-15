@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>10.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>10.Write a program that extracts from a given text all palindromes, e.g. "ABBA", "lamal", "exe".</p>
+    <hr/>
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var text = "Write a program SOS that extracts from a given non text all palindromes, e.g. ABBA , lamal , exe";
+
+        jsConsole.writeLine(text);
+        jsConsole.writeLine();
+        jsConsole.writeLine(findPalindromes(text).join(', '));
+
+        function findPalindromes(text) {
+            var palindromesArr = new Array();
+            var words = text.split(' ');
+
+            for (var k = 0; k < words.length;k++) {
+                var isPalindrome = true;
+                for (var i = 0; i < words[k].length / 2; i++) {
+                    if (words[k][i] !== words[k][words[k].length - 1 - i]) {
+                        isPalindrome = false;
+                        break;
+                    }
+                }
+                if (isPalindrome==true && words[k]!=='' && words[k].length>1) {
+                    palindromesArr.push(words[k]);
+                }
+            }
+            return palindromesArr;
+        }
+    </script>
+</body>
+</html>

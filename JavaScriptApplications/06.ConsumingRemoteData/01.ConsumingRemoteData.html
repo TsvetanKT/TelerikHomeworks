@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>01.Task</title>
+    <script src="libs/q.js"></script>
+</head>
+<body>
+	<h4>01.Task</h4>
+	<p>Create a module that exposes methods for performing HTTP requests by given URL and headers</p>
+	<ul>
+		<li>
+			getJSON and postJSON
+			<ul>
+				<li>Both methods should work with promises</li>
+			</ul>
+		</li>
+	</ul>
+	<p>app.js server from server folder must be running (command "node app.js")</p>
+    <div id="wrapper"> </div>
+    <script src="scripts/httpRequest.js" data-main="scripts/app.js"></script>
+    <script>
+		var url = 'http://localhost:3000/students';
+		var header = {
+			accept: 'application/json',
+			contentType: 'application/json'
+		};
+
+		var studentA = {
+			name: 'Joe',
+			grade: 6
+		};
+
+		var studentB = {
+			name: 'Koko',
+			grade: 11
+		};
+
+		var studentC = {
+			name: 'Ceca',
+			grade: 12
+		};
+
+		var studentD = {
+			name: 'Samuil',
+			grade: 3
+		};
+
+		httpRequest.postJSON(url, studentA, header)
+			.then(httpRequest.postJSON(url, studentB, header))
+			.then(httpRequest.postJSON(url, studentC, header))
+			.then(httpRequest.postJSON(url, studentD, header));
+
+		httpRequest.getJSON(url, header)
+			.then(function(data) {
+				var jsonData = JSON.parse(data);
+				var len = jsonData.count;
+				var item = document.createElement('p');
+				for (var i = 0; i < len; i += 1) {
+					var student = jsonData.students[i];				
+					item.innerHTML += student.name + ' is in ' + student.grade + ' grade.<br />';
+				}
+
+				document.getElementById('wrapper').appendChild(item);
+
+			}, function(err) {
+				document.getElementById('wrapper').innerHTML = 'ERROR has occurred.';
+		});
+    </script>
+</body>
+</html>

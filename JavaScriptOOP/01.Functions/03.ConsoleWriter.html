@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Functions Exercise 03</title>
+</head>
+<body>
+    <h4>03.Exercise</h4>
+    <p>Output in the console</p>
+    <input type="button" value="Message" onClick="msgFunc()">
+    <input type="button" value="Message + Format" onClick="msgFormatFunc()">
+    <input type="button" value="ToString" onClick="toStringFunc()">
+    <input type="button" value="Error" onClick="errorFunc()">
+    <input type="button" value="Warning" onClick="warningFunc()">
+    <input type="button" value="Clear" onClick="window.location.href=window.location.href">
+    <hr />
+    <script type="text/javascript" src="Exercise03.js"></script>
+    <script type="text/javascript">
+    // 03.Create a module to work with the console object. Implement functionality for:
+    // Writing a line to the console 
+    // Writing a line to the console using a format
+    // Writing to the console should call toString() to each element
+    // Writing errors and warnings to the console with and without format
+    //
+    // var specialConsole = …
+    // specialConsole.writeLine("Message: hello");
+    // //logs to the console "Message: hello"
+    // specialConsole.writeLine("Message: {0}", "hello");
+    // //logs to the console "Message: hello"
+    // specialConsole.writeError("Error: {0}", "Something happened");
+    // specialConsole.writeWarning("Warning: {0}", "A warning");
+
+        function msgFunc() {
+            specialConsole.writeLine('Message: hello');
+        }
+        
+        function msgFormatFunc() {
+            specialConsole.writeLine("Message: {1} {0}.", "to You", "Hello");
+        }
+
+        function toStringFunc() {
+            var random1 = Math.floor((Math.random() * 10) + 1),
+                random2 = Math.floor((Math.random() * 10) + 1); 
+            specialConsole.writeLine("Message: {0} + {1} = {2}", random1, random2, (random1 + random2));
+        }
+        
+        function errorFunc() {
+            specialConsole.writeLine("Error! {0}", "Some error here");
+        }
+
+        function warningFunc() {
+            specialConsole.writeLine("Warning! {0}", "Some warning here");
+        }
+    </script>
+</body>
+</html>

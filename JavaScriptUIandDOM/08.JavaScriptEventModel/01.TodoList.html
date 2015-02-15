@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>01.Todo List</title>
+        <style>
+            #wrapper {
+                width: 300px;
+                height: 300px;
+                margin-left: 100px;
+                margin-top: 100px;
+                padding: 5px;
+                border: 2px solid black;
+                border-bottom: 0;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            #block2 {
+                margin-top: 5px;
+            }
+
+            #list {
+                margin-top: 10px;
+            }
+
+            #inputClone {
+                display: none;
+            }
+
+            label {
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body>    
+        <div>
+            <p>01.Create a TODO list with the following UI controls:</p>
+            <ul>
+                <li>Form input for new Item</li>
+                <li>Button for adding the new Item</li>
+                <li>Button for deleting some item</li>
+                <li>Show and Hide Button</li>
+            </ul>
+        </div>  
+        
+        <div id="wrapper">
+            <h1>TODO List</h1>
+            <div id="block1">
+                <input id="input" type="text" name="name" placeholder="Enter TODO item" />
+                <button onclick="addItem(event)" type="button">Add</button>
+
+            </div>
+
+            <div id="block2">
+                <button onclick="deleteChecked()" type="button">Delete Checked</button>
+                <button onclick="deleteAll()" type="button">Delete All</button>
+                <button onclick="selectAll()" type="button">Select All</button>
+                <button onclick="showChecked()" type="button">Show TODO</button>
+                <button onclick="hideChecked()" type="button">Hide TODO</button>
+            </div>
+            <div id="list">
+            </div>
+        </div>
+        <script>
+
+
+
+            var num = 0;
+
+            function showChecked() {
+                var div = document.getElementById('list').children;
+
+                for (var i = 0; i < div.length; i += 1) {
+                    if (div[i].firstElementChild instanceof HTMLInputElement) {
+                        if (div[i].firstElementChild.checked) {
+                            div[i].className = 'hide';
+                            div[i].firstElementChild.checked = false;
+                        }
+                    }
+                }
+
+                for (var i = 0; i < div.length; i += 1) {
+                    if (div[i].className === 'hide') {
+                        div[i].style.display = '';
+                        div[i].className = '';
+                    }
+                }
+            }
+
+            function hideChecked() {
+                var div = document.getElementById('list').children;
+
+                for (var i = 0; i < div.length; i += 1) {
+                    if (div[i].firstElementChild instanceof HTMLInputElement) {
+                        if (div[i].firstElementChild.checked) {
+                            div[i].className = 'hide';
+                        }
+                    }
+                }
+
+                for (var i = 0; i < div.length; i += 1) {
+                    if (div[i].className === 'hide') {
+                        div[i].style.display = 'none';
+
+                    }
+                }
+            }
+
+            function deleteChecked() {
+                for (var k = 0; k < 8; k += 1) {
+                    var divs = document.getElementById('list').children;
+
+                    for (var i = 0; i < divs.length; i += 1) {
+                        if (divs[i].firstElementChild instanceof HTMLInputElement) {
+                            if (divs[i].firstElementChild.checked) {
+                                divs[i].firstElementChild.checked = undefined;
+                                divs[i].className = 'forDeleting';
+                            }
+                        }
+                    }
+
+                    for (var i = 0; i < divs.length; i += 1) {
+                        if (divs[i].className === 'forDeleting') {
+                            divs[i].parentNode.removeChild(divs[i]);
+                        }
+                    }
+                }
+            }
+
+            function deleteAll() {
+                var div = document.getElementById('list');
+                while (div.firstChild) {
+                    div.removeChild(div.firstChild);
+                }
+            }
+
+            function addItem(event) {
+                var div = document.getElementById('list');
+                var input = document.getElementById('input')
+                var inputValue = input.value;
+
+                if (inputValue.trim() !== '') {
+                    div.innerHTML += '<div><input type="checkbox" id="checkbox-' + (num += 1) + '"/><label for="checkbox-' + num + '">' +
+                        inputValue + '</label></div>';
+                }
+
+                input.value = '';
+            }
+
+            function selectAll() {
+                var checkboxes = document.getElementsByTagName('input');
+                var len = checkboxes.length;
+                var areChecked = false;
+
+                for (var i = 0; i < len; i += 1) {
+                    if (checkboxes[i].type === 'checkbox') {
+                        checkboxes[i].checked = 'checked';
+                    }
+                }        
+            }
+        </script>
+    </body>
+</html>
+

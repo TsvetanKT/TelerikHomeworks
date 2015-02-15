@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>01.HandlebarTable</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            text-align: center;
+            border: 2px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        th {
+            background: skyblue;
+            font-size: 1.2em;
+        }
+
+        tr:nth-child(2n) {
+            background: lightgreen;
+        }
+
+        tr:nth-child(2n + 1) {
+            background: lightcoral;
+        }
+
+        tr td:nth-child(2) {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <p>01.Create a table using Handlebars.js</p>
+    <hr />
+    <div id="table-placer"></div>
+    <script id="post-template" type="text/x-handlebars-template">      
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Title</th>
+                    <th>Date #1</th>
+                    <th>Date #2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each classes}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{title}}</td>
+                    <td>{{dateOne}}</td>
+                    <td>{{dateTwo}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>   
+    </script>
+
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="handlebars-v1.3.0.js"></script>
+
+    <!-- For some reason the runtime library does not works, so i'm using the extended version
+    <script type="text/javascript" src="handlebars.runtime-v1.3.0"></script>-->
+    <script type="text/javascript">
+
+        var classes = [{
+            title: 'Course Introduction',
+            dateOne: 'Wed 18:00, 28-May-2014',
+            dateTwo: 'Thu 14:00, 29-May-2014'
+        }, {
+            title: 'Document Object Model',
+            dateOne: 'Wed 18:00, 28-May-2014',
+            dateTwo: 'Thu 14:00, 29-May-2014'
+        }, {
+            title: 'HTML5 Canvas',
+            dateOne: 'Thu 18:00, 29-May-2014',
+            dateTwo: 'Fri 14:00, 30-May-2014'
+        }, {
+            title: 'KineticJS Overview',
+            dateOne: 'Thu 18:00, 29-May-2014',
+            dateTwo: 'Fri 14:00, 30-May-2014'
+        }, {
+            title: 'SVG and RaphaelJS',
+            dateOne: 'Wed 18:00, 04-Jun-2014',
+            dateTwo: 'Thu 14:00, 05-Jun-2014'
+        }, {
+            title: 'Animations with Canvas and SVG',
+            dateOne: 'Wed 18:00, 04-Jun-2014',
+            dateTwo: 'Thu 14:00, 05-Jun-2014'
+        }, {
+            title: 'DOM Operations',
+            dateOne: 'Thu 18:00, 05-Jun-2014',
+            dateTwo: 'Fri 14:00, 06-Jun-2014'
+        }, {
+            title: 'Event Model',
+            dateOne: 'Thu 18:00, 05-Jun-2014',
+            dateTwo: 'Fri 14:00, 06-Jun-2014'
+        }, {
+            title: 'jQuery Overview',
+            dateOne: 'Wed 18:00, 11-Jun-2014',
+            dateTwo: 'Thu 14:00, 12-Jun-2014'
+        }, {
+            title: 'HTML Templates',
+            dateOne: 'Wed 18:00, 11-Jun-2014',
+            dateTwo: 'Thu 14:00, 12-Jun-2014'
+        }, {
+            title: 'Exam Preparation',
+            dateOne: 'Thu 18:00, 12-Jun-2014',
+            dateTwo: 'Fri 14:00, 13-Jun-2014'
+        }, {
+            title: 'Exam',
+            dateOne: 'Tue 10:00, 17-Jun-2014',
+            dateTwo: 'Tue 16:30, 17-Jun-2014'
+        }, {
+            title: 'Teamwork Defense',
+            dateOne: 'Thu 10:00, 19-Jun-2014',
+            dateTwo: 'Thu 10:00, 19-Jun-2014'
+        }, {
+            title: 'End of Class',
+            dateOne: 'Thu 22:00, 19-Jun-2014',
+            dateTwo: 'Thu 22:00, 19-Jun-2014'
+        }];
+
+        var tableTemplate = $('#post-template').html();
+        var template = Handlebars.compile(tableTemplate);
+        var classesInnerHtml = template({classes: classes});
+        $('#table-placer').html(classesInnerHtml);
+
+    </script>
+</body>
+</html>

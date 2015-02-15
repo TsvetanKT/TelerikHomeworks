@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="styles/js-console.css" rel="stylesheet" />
+    <title>WebStorages HW</title>
+</head>
+<body>
+<div>
+    Create a simple number guessing game
+    <ul>
+        <li>The computer generates a random number with four different digits
+            <ul>
+                <li>The leftmost digit must not be 0 (zero)</li>
+                <li>For simplicity called <b>abcd</b></li>
+            </ul>
+        </li>
+        <li>At each turn the player enters a four-digit number
+            <ul>
+                <li>For simplicity called <b>xyzw</b></li>
+            </ul>
+        </li>
+        <li>When the game ends:
+            <ul>
+                <li>Ask the player for a nickname</li>
+                <li>Save the nickname inside the localStorage</li>
+            </ul>
+        </li>
+        <li>Implement a high-score list</li>
+        <li>Sheep means that a digit from <b>xyzw</b> is contained in <b>abcd</b>, but not on the same position
+            <ul>
+                <li>If two such digits exists, the sheep are 2</li>
+            </ul>
+        </li>
+        <li>Ram means that a digit from <b>xyzw</b> is contained in abcd and it is on the same position
+            <ul>
+                <li>If two such digits exists, the rams are 2</li>
+            </ul>
+        </li>
+        <li>The game continues until the player guesses the number <b>abcd</b>
+            <ul>
+                <li>i.e. has 4 rams</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div id="game">
+	<label for="input">Input: </label>
+    <input id="input">
+    <button id="play-game">Enter</button> 
+    <button id="high-scores">Display High Scores</button>
+    <button id="clear">Clear High Scores</button>
+    <button onClick="location.reload(); ">Reload</button>
+    <div id="js-console">
+    </div>
+</div>
+	<script src="libs/underscore-min.js"></script>
+	<script src="scripts/js-console.js"></script>
+	<script src="scripts/high-score.js"></script>
+	<script src="scripts/sheepAndRamsCore.js"></script>
+	<script src="scripts/game-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>06.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>06.Write a function that extracts the content of a html page given as text. The function should return anything that is in a tag, without the tags:"</p>
+    <p>&#60html&#62&#60head&#62&#60title&#62Sample site&#60/title&#62&#60/head&#62&#60body&#62&#60div&#62text&#60div&#62more text&#60/div&#62and more...&#60/div&#62in body&#60/body&#62&#60/html&#62<br/>Result:<br/>Sample sitetextmore textand more...in body</p>
+    <p></p>
+    <hr/>
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var text= "<html><head><title>Sample site</title></head><body><div>text<div>more text</div>and more...</div>in body</body></html>";
+        //jsConsole.writeLine(text);
+
+        function extractContent(text) {
+            var extractedText = buildStringBuilder();
+            var indexRigthBraket = text.indexOf(">");
+            while (indexRigthBraket > -1 && indexRigthBraket != text.length - 1) {
+                if (text[indexRigthBraket + 1] != "<") {
+                    var stringStart = text.substring(indexRigthBraket + 1, text.indexOf("<", indexRigthBraket + 1));
+
+                    extractedText.append(stringStart).append(""); // With "append(" ")" looks better.
+                }
+                var indexRigthBraket = text.indexOf(">", indexRigthBraket + 1);
+            }
+            return extractedText.toString();
+        }
+
+        function buildStringBuilder() {
+            return {
+                strs: [],
+                len: 0,
+                append: function(str) {
+                    this.strs[this.len++] = str;
+                    return this;
+                },
+                toString: function() {
+                    return this.strs.join("");
+                }
+            };
+        }
+
+        jsConsole.writeLine(extractContent(text));
+
+    </script>
+</body>
+</html>

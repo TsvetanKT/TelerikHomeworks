@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>03.ColorfulText</title>
+    </head>
+    <body>  
+        <div>
+            <p>03.Create a text area and two inputs with type="color"</p>
+            <ul>
+                <li>Make the font color of the text area as the value of the first color input</li>
+                <li>Make the background color of the text area as the value of the second input</li>
+            </ul>
+        </div>
+        <textarea rows="4" cols="50" id="theTextArea">
+At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+        </textarea> 
+        <label for="fontColor">Font:</label>
+        <input type="color" id="fontColor" />
+        <label for="backgroundColor">Background:</label>
+        <input type="color" id="backgroundColor"  value="#ff00ff" />
+        <button id="button-generator" onclick="applyColors()">Apply the colors</button>
+    <script>
+
+    // 03.Create a text area and two inputs with type="color"
+    //     Make the font color of the text area as the value of the first color input
+    //     Make the background color of the text area as the value of the second input
+
+        function applyColors() {
+            var textArea = document.getElementById('theTextArea');
+            textArea.style.color = document.getElementById('fontColor').value;
+            textArea.style.backgroundColor = document.getElementById('backgroundColor').value;
+        }
+
+    </script>
+    </body>
+</html>
+

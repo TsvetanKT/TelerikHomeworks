@@ -1,0 +1,50 @@
+﻿<#@ template language="C#" hostspecific="true" #>
+<#@ output extension=".html" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Template T4</title>
+	<style>
+		table,th,td {
+			border:1px solid black;
+			border-collapse:collapse;
+		}
+
+		tr:nth-child(2n) {
+			background-color: lightgrey;
+		}
+
+		td {
+			text-align: center;
+		}
+
+		th {
+			background-color: skyblue;
+		}
+	</style>
+</head>
+<body>
+	<table style="width:600px">
+		<tr>
+		  <th>Filename</th>
+		  <th>Size</th>
+		  <th>Extension</th>
+		</tr>
+	<#  
+		string currentDir = this.Host.ResolvePath(".");
+		foreach (string dir in Directory.GetFiles(currentDir))
+		{
+			FileInfo fileInfo = new FileInfo(dir);
+	#>
+		<tr>
+		  <td><#= fileInfo.Name #></td>
+		  <td><#=fileInfo.Length + " bytes" #></td>		
+		  <td><#= fileInfo.Extension #></td>
+		</tr>
+	<#  } #>
+	</table>
+</body>
+</html>

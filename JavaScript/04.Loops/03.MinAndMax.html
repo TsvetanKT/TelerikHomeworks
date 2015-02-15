@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>03.MinAndMax</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<p>03. Write a script that finds the max and min number from a sequence of numbers.</p>
+	<a href="#" id="btn-check-prime" onclick="onCalcFactBtnClick()">Generate result</a>
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+		function onCalcFactBtnClick() {	
+			var stringBuilder = "";
+			var arr =  [1, 2, 3, 4, 5, 6, 7, 8];
+			for (var i=0; i<8; i++) {
+				arr[i]=Math.floor((Math.random() * 101));
+			}
+			
+			var min = arr[0];
+			var max = arr[0];
+			for(var index in arr) {
+				stringBuilder+= arr[index] + " ";
+				if (min > arr[index]) {
+					min = arr[index];
+				}
+				
+				if (max < arr[index]) {
+					max = arr[index];
+				} 
+			}
+			
+			jsConsole.writeLine('The array :');
+			jsConsole.writeLine(stringBuilder);	
+			jsConsole.writeLine('Min number: '+ min);
+			jsConsole.writeLine('Max number: '+ max);
+			jsConsole.writeLine('----------------------------------------');
+		}
+	</script>
+</body>
+</html>

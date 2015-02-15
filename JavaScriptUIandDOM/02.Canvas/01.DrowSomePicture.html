@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas - Exercise 01</title>
+</head>
+<body>  
+    <h4>01.Exercise</h4>
+    <p>Draw some graphics using canvas.</p>
+    <canvas width="800" height="600" style="border:3px solid black;">
+        Canvas not supported
+    </canvas>
+
+    <script type="text/javascript">
+        var ctx = document.getElementsByTagName("canvas")[0].getContext("2d");
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0,0, ctx.canvas.width,ctx.canvas.height)
+        ctx.beginPath();
+        ctx.strokeStyle = "#333366";
+        ctx.lineWidth = 3;
+
+        // Drawing the face
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.fillStyle = "#00FFFF";
+
+        //head
+        ctx.arc(100, 125, 50, 0, 2 * Math.PI, false);
+        ctx.fill();
+        ctx.stroke();
+
+        //eyes
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.arc(100 - 20, 125 - 10, 2, 0, 2 * Math.PI, false);
+        ctx.moveTo(100 + 10, 125 - 10);
+        ctx.arc(100 + 10, 125 - 10, 2, 0, 2 * Math.PI, false);
+        ctx.stroke();
+        ctx.lineWidth = 2;
+        
+        ctx.save();
+        ctx.scale(1, 0.5);
+        ctx.beginPath();
+        ctx.arc(82, 230, 8, 0, 2 * Math.PI, false);
+        ctx.moveTo(120, 230);
+        ctx.arc(112, 230, 8, 0, 2 * Math.PI, false);
+        ctx.stroke();
+
+        ctx.scale(1, 0.3);
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.arc(100, 600, 60, 0, 2 * Math.PI, false);
+        ctx.fillStyle = "#009966"
+        ctx.stroke();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(100, 600, 30, 0, 2 * Math.PI, false);
+        ctx.stroke();
+        ctx.fill();
+
+        //hat
+        ctx.beginPath();
+        ctx.fillRect(70, 75, 60, 520);
+        ctx.lineWidth = 2;
+        ctx.moveTo(69, 75);
+        ctx.lineTo(69, 600);
+        ctx.moveTo(131, 75);
+        ctx.lineTo(131, 600);       
+        ctx.stroke();
+
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(100, 80);
+        ctx.arc(100, 80, 30, 0, 2 * Math.PI, false);
+        ctx.stroke();
+        ctx.fill();
+        ctx.restore(); 
+
+        //mouth     
+        ctx.lineWidth = 2;  
+        ctx.beginPath();
+        ctx.arc(100, 130, 30, 30*Math.PI/180, 150*Math.PI/180, false);
+        ctx.closePath();
+        ctx.stroke();
+
+        //nose
+        ctx.moveTo(100, 120);
+        ctx.lineTo(95, 140);
+        ctx.lineTo(105, 140);
+        ctx.stroke();
+
+        //-------------------------------------------------
+        // Drawing the bicycle
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.arc(150 , 450 , 80, 0, 2 * Math.PI, false);
+        ctx.moveTo(450, 450);
+        ctx.arc(450 , 450 , 80, 0, 2 * Math.PI, false);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(300, 450);
+        ctx.lineTo(380, 300);
+        ctx.lineTo(200, 300);
+        ctx.lineTo(150, 450);
+        ctx.lineTo(300, 450);
+        ctx.moveTo(320, 450);
+        ctx.arc(300, 450 , 20, 0, 2 * Math.PI, false);
+        ctx.moveTo(315, 465);
+        ctx.lineTo(331, 482);
+        ctx.moveTo(288, 436);
+        ctx.lineTo(267, 415);
+        ctx.moveTo(300, 450);
+        ctx.lineTo(183, 277);
+        ctx.moveTo(150, 277);
+        ctx.lineTo(220, 277);
+        ctx.moveTo(450, 450);
+        ctx.lineTo(364, 266);
+        ctx.lineTo(297, 291);
+        ctx.moveTo(364, 266);
+        ctx.lineTo(412, 220);
+        ctx.stroke();
+
+        //-------------------------------------------------
+        // Drawing the house
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.fillStyle = "#663300";
+        ctx.strokeStyle = "black";
+
+        ctx.fillRect(500, 120, 250, 250);
+        ctx.strokeRect(500, 120, 250, 250);
+        ctx.moveTo(500, 120);
+        ctx.lineTo(625, 15);
+        ctx.lineTo(750, 120);
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(670, 100);
+        ctx.fillRect(670, 15, 30, 70);
+        ctx.lineTo(670, 15);
+        ctx.moveTo(700, 100);
+        ctx.lineTo(700, 15);
+        ctx.lineTo(670, 15);
+        ctx.moveTo(620, 370);
+        ctx.lineTo(620, 265);
+        ctx.arc(570, 265, 50, 0, Math.PI, true);
+        ctx.moveTo(520, 370);
+        ctx.lineTo(520, 265);
+        ctx.moveTo(570, 370);
+        ctx.lineTo(570, 215);
+        ctx.moveTo(555, 315);
+        ctx.arc(550, 315, 5, 0, 2*Math.PI/180, true);
+        ctx.moveTo(595, 315);
+        ctx.arc(590, 315, 5, 0, 2*Math.PI/180, true);
+        ctx.stroke();
+
+        ctx.fillStyle = "black";
+        ctx.strokeStyle = "#663300";
+        ctx.beginPath();
+
+        // windows
+        ctx.fillRect(650, 230, 70, 70);
+        ctx.moveTo(685, 230);
+        ctx.lineTo(685, 300);
+        ctx.moveTo(650, 265);
+        ctx.lineTo(720, 265);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillRect(650 , 230 - 100, 70, 70);
+        ctx.moveTo(685, 230 - 100);
+        ctx.lineTo(685, 300 - 100);
+        ctx.moveTo(650, 265 - 100);
+        ctx.lineTo(720, 265 - 100);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillRect(650 - 120 , 230 - 100, 70, 70);
+        ctx.moveTo(685 - 120, 230 - 100);
+        ctx.lineTo(685 - 120, 300 - 100);
+        ctx.moveTo(650 - 120, 265 - 100);
+        ctx.lineTo(720 - 120, 265 - 100);
+        ctx.fill();
+        ctx.stroke();
+
+        //flag
+        ctx.beginPath();
+        ctx.moveTo(520, 103);
+        ctx.lineTo(520, 20);
+        ctx.stroke();
+
+        ctx.strokeStyle = "#606060";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(520, 20, -100, 60);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "white";
+        ctx.fillRect(520, 20, -100, 20);
+        ctx.fill();
+        ctx.fillStyle = "green";
+        ctx.fillRect(520, 40, -100, 20);
+        ctx.fill();
+        ctx.fillStyle = "red";
+        ctx.fillRect(520, 60, -100, 20);
+        ctx.fill();
+
+    </script>
+</body>
+</html>
+

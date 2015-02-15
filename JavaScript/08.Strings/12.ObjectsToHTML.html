@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>12.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>12.Write a function that creates a HTML UL using a template for every HTML LI. The source of the list should an array of elements. Replace all placeholders marked with –{…}–   with the value of the corresponding property of the object. Example:</p>
+    <p>&#60div data-type="template" id="list-item"&#62<br/>&#60strong&#62-{name}-&#60/strong&#62 &#60span&#62-{age}-&#60/span&#62<br/>/div&#62</p>
+    <p>var people = [{name: 'Peter', age: 14},…];<br/>var tmpl = document.getElementById('list-item').innerHtml;<br/>var peopleList = generateList(people, template);<br/>//peopleList = '&#60ul&#62&#60li&#62&#60strong<br/>&#62Peter&#60/strong&#62 &#60span&#6214&#60/span&#62&#60/li&#62&#60li&#62…&#60/li&#62…&#60/ul&#62'</p>
+    <hr/>
+    <div id="list-item" data-type="template">
+        <strong>
+            -{name}-
+        </strong>    
+        <span>
+            -{age}-
+        </span>           
+    </div>
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var people = [{
+            name: "Jojo",
+            age: 13
+        }, {
+            name: "Koko",
+            age: 48
+        }, {
+            name: "Svetlana",
+            age: 26
+        }];
+
+        var temp = document.getElementById("list-item").innerHTML;
+        var finalArr = generateList(temp, people);
+        for (var i = 0; i < finalArr.length; i += 2) {
+            jsConsole.writeLine("<ul><li><strong>" + finalArr[i] + "</strong><span>" + finalArr[i + 1] + "</span></li><li>…</li>…</ul>")
+        }
+
+        function generateList(temp, people) {
+            var holder = temp;
+            var liArr = [];
+            for (var person in people) {
+                var index = temp.indexOf("{name}");
+                var index2 = temp.indexOf("{age}");
+                temp = temp.replace("{name}", people[person].name);
+                liArr.push(temp.substr(index, people[person].name.length));
+                temp = holder;
+                temp = temp.replace("{age}", people[person].age);
+                liArr.push(temp.substr(index2, people[person].age.toString().length));
+                temp = holder;
+            }
+            return liArr;
+        }
+    </script>
+</body>
+</html>

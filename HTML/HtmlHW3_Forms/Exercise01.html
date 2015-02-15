@@ -1,0 +1,233 @@
+	    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta charset="utf-8">
+        <title>Exercise 1 - Forms</title>
+        <style type="text/css">
+            table, td, th
+            {
+                border: 1px solid #615C5C;
+                border-collapse: collapse;
+                padding: 5px;
+            }
+            th
+            {
+                text-align: right;
+            }
+            input
+            {
+                width: 300px;
+            }
+            input[type="radio"]
+            {
+                width: 20px;
+            }
+            tfoot
+            {
+                background:#92CBEF;
+                text-align: center;
+            }
+            tfoot input
+            {
+                width: auto;
+            }
+            #address
+            {
+                width: 300px;
+                height: 70px;
+            }
+            #city, #state
+            {
+                width: 100px;
+            }
+            #countryCode, #areaCode
+            {
+                width: 40px;
+            }
+            #phone
+            {
+                width: 80px;
+            }
+            #birthDay, #birthMonth
+            {
+                width: 30px;
+            }
+            #birthYear
+            {
+                width: 50px;
+            }
+            #comments
+            {
+                width:300px;
+                height: 100px;
+            }
+            .left
+            {
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="01WebForm.html" method="post">
+        <table>
+            <colgroup>
+                <col class="left" />
+                <col class="first" />
+                <col class="second" />
+                <col class="third" />
+            </colgroup>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <input type="submit" value="Submit" />
+                        <input type="reset" value="Clear This Form" />
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <th>
+                        <label for="lastName">
+                            Last Name</label>
+                    </th>
+                    <td colspan="3">
+                        <input id="lastName" name="lastName" type="text" value="Nakov" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="firstName">
+                            First Name</label>
+                    </th>
+                    <td colspan="3">
+                        <input id="firstName" name="firstName" type="text" value="Svetlin" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="address">
+                            Address</label>
+                    </th>
+                    <td colspan="3">
+                        <textarea id="address" name="address">17 Hristo Botev Str.
+floor 3, apt. 12</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="city">
+                            City</label>
+                    </th>
+                    <td>
+                        <input id="city" name="city" type="text" value="Kaspichan" />
+                    </td>
+                    <th>
+                        <label for="state">
+                            State</label>
+                    </th>
+                    <td>
+                        <input id="state" name="state" type="text" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="postCode">
+                            Zip/Postal Code</label>
+                    </th>
+                    <td colspan="3">
+                        <input id="postCode" name="postCode" type="text" value="9325" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="country">
+                            Country</label>
+                    </th>
+                    <td colspan="3">
+                        <select id="country" name="country">
+                            <option>Bulgaria</option>
+                            <option>Romania</option>
+                            <option>Brazil</option>
+                            <option>Turkey</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="phone">
+                            Phone (country code,
+                            <br />
+                            area code, number)</label>
+                    </th>
+                    <td colspan="3">
+                        (+<input id="countryCode" name="countryCode" type="text" value="359" />)
+                        <input id="areaCode" name="areaCode" type="text" value="88" />-
+                        <input id="phone" name="phone" type="text" value="8334343" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="eMail">
+                            E-mail</label>
+                    </th>
+                    <td colspan="3">
+                        <input id="eMail" name="eMail" type="email" value="nakov@kaspichan.org" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Birth Date
+                    </th>
+                    <td colspan="3">
+                        <label for="birthMonth">
+                            Month</label>
+                        <input id="birthMonth" name="birthMonth" type="text" value="06" />
+                        <label for="birthDay">
+                            Day</label>
+                        <input id="birthDay" name="birthDay" type="text" value="14" />
+                        <label for="birthYear">
+                            Year(4 digit)</label>
+                        <input id="birthYear" name="birthYear" type="text" value="1980" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="gender">
+                            Gender</label>
+                    </th>
+                    <td colspan="3">
+                        <select id="gender" name="gender">
+                            <option>male</option>
+                            <option>female</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Starting Date
+                    </th>
+                    <td colspan="3">
+                        <input id="spring2006" name="startingDate" type="radio" checked="checked" />
+                        <label for="spring2006">
+                            Spring 2006</label>
+                        <input id="summer2006" name="startingDate" type="radio" />
+                        <label for="summer2006">
+                            Summer 2006</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="comments">
+                            Comments/Questions</label>
+                    </th>
+                    <td colspan="3">
+                        <textarea id="comments" name="comments">Please send me more information about the lodging.
+                        </textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+    </body>
+    </html>
+

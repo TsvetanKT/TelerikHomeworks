@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>08 NumbertsToEnglishText</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <div>
+        <p>08.Write a script that converts a number in the range [0...999] to a text corresponding to its English pronunciation.</p>
+		<br />
+		<p>No need to watch the JS console for this one :-)</p>
+		<br />
+    </div>
+    <div>
+        <span>
+            <label for="number">Please enter a number (0-999): </label>
+            <input type="text" id="number" />
+        </span>
+        <a href="#" onclick="numberToText()" style="border:1px solid black;">Execute</a>
+    </div>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var Ones = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
+                                       "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+        var ones = ["\b ", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+                                           "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        var Tens = ["", "", "Twenty", "Thirty", "Fourty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+        var tens = ["", "", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        function numberToText() {
+            var n = jsConsole.readFloat("#number");
+
+            if (n >= 0 && n <= 19) {
+                jsConsole.writeLine(Ones[n]);
+            }
+
+            if (n >= 20 && n <= 99) {
+                jsConsole.write(Tens[Math.floor(n / 10)]);
+                if (n % 10 != 0)
+                    jsConsole.write("-" + ones[n % 10]);
+                jsConsole.writeLine();
+            }
+
+            if (n >= 100) {
+
+                if (Math.floor(n / 100) >= 0 && Math.floor(n / 100) <= 19) {
+                    jsConsole.write(Ones[Math.floor(n / 100)]);
+                }
+
+                if ((n % (Math.floor(n / 100) * 100) <= 19) && (n % (Math.floor(n / 100) * 100) >= 1)) {
+                    jsConsole.write(" hundred and ");
+                    jsConsole.writeLine(ones[n - Math.floor(n / 100) * 100]);
+                }
+  
+                if ((n % (Math.floor(n / 100) * 100) == 0) || (n % (Math.floor(n / 100) * 100) >= 20) && (n % (Math.floor(n / 100) * 100) <= 99)) {
+                    jsConsole.write(" hundred ");
+                    jsConsole.write(tens[Math.floor(n / 10) % 10]);
+                    jsConsole.writeLine(" " + ones[n % 10]);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

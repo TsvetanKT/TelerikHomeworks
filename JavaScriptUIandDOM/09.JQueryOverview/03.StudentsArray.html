@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>03.StudentsArray</title>
+    <style>
+        table {
+            text-align: center;
+        }
+
+            th {
+                border: 2px solid black;
+            }
+
+            td {
+                border: 1px solid black;
+            }
+    </style>
+</head>
+<body>
+    <p>03.By given an array of students, generate a table that represents these students</p>
+    <ul>
+       <li>Each student has first name,last name and grade</li>
+       <li>Use jQuery</li>
+   </ul>   
+   <hr/>
+    <div id="students-list"></div>
+
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            var arr = [{ firstname: "Joe", lastname: "Cocker", grade: "12" },
+                { firstname: "Ceca", lastname: "Grisheva", grade: "8" },
+                { firstname: "Mima", lastname: "Boboikova", grade: "5" },
+                { firstname: "Coko", lastname: "Dimoff", grade: "1" },
+                { firstname: "Petur", lastname: "Goshov", grade: "7" }];
+
+
+            var str = '';
+            for (var i = 0; i < arr.length; i += 1) {
+                str += '<tr>' +
+                    '<td>' + arr[i].firstname + '</td>' +
+                    '<td>' + arr[i].lastname + '</td>' +
+                    '<td>' + arr[i].grade + '</td>' +
+                    '</tr>';
+            }
+
+            var table = $('<table>' +
+                '<tr>' +
+                '<th>First Name</th>' +
+                '<th>Last Name</th>' +
+                '<th>Grade</th>' +
+                '</tr>' + str + '</table>');
+            var container = $('#students-list');
+            container.append(table);
+        });
+
+    </script>
+</body>
+</html>

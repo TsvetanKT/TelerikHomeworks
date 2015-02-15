@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>04.TagCloud</title>
+    </head>
+    <body>  
+        <div>
+            <p>04.Create a tag cloud:</p>
+            <ul>
+                <li>Visualize a string of tags (strings) in a given container</li>
+                <li>By given minFontSize and maxFontSize, generate the tags with different font size, depending on the number of occurrences</li>
+            </ul>
+        </div>
+        <script>
+        
+            function generateTagCloud(stringArray, minSize, maxSize) {
+                var i = 0,
+                    j = 0,
+                    k = 0;
+                    l = 0;
+                var docFragment = document.createDocumentFragment();
+                var addedNamesArray = [];
+
+                // Convert to lowerCase so http = HTTP
+                for (l = 0; l < stringArray.length; l += 1) {
+                    stringArray[l] = stringArray[l].trim().toLowerCase();
+                }
+
+                for (i = 0; i < stringArray.length; i += 1) {
+                    var string = document.createElement('div');
+                    string.textContent = (stringArray[i] + ' ');
+                    string.style.display = 'inline';
+                    var isAdded = false;
+
+                    for (k = 0; k < addedNamesArray.length; k += 1) {
+                        if (stringArray[i] === addedNamesArray[k]) {
+                            isAdded = true;
+                            break;
+                        }
+                    }
+
+                    if (!isAdded) {
+                        var sizer = parseInt(minSize) - 1;
+
+                        for (j = 0; j < stringArray.length; j += 1) {
+                            if (stringArray[i] === stringArray[j]) {
+                                sizer += 1;
+                            }
+                        }
+
+                        if (sizer > maxSize) {
+                            sizer = maxSize;
+                        }
+                        string.style.fontSize = sizer + 'px';
+                        addedNamesArray.push(stringArray[i]);
+                        docFragment.appendChild(string);
+                    }
+                }
+                return docFragment;
+            }
+
+            // Note: 'ASP.NET MVC' is diferent than 'ASP.NET' 
+            var tags = [
+                'cms', 'javascript', 'js', 'ASP.NET MVC', '.net', '.net', 'css', 'css',
+                'css', 'css', 'css', 'css', 'css', 'css', 'css', 'css', 'css', 'css',
+                'wordpress', 'xaml', 'js', 'http', 'web', 'asp.net', 'asp.net MVC',
+                'ASP.NET MVC', 'wp', 'javascript', 'js', 'cms', 'html', 'javascript',
+                'http', 'http', 'CMS', 'js', 'js', 'js', 'js', 'js', 'js', 'js', 'js',
+                'http', 'HTTP', 'http', 'HTTP', 'http', 'HTTP', 'http', 'HTTP', 'http', 'HTTP',
+                'asp.net', 'asp.net', 'asp.net', 'asp.net', 'asp.net', 'asp.net', 'asp.net'
+            ];
+
+            var tagCloud = generateTagCloud(tags, 17, 42);
+
+            var container = document.createElement('div');
+            container.style.width = '400px';
+            container.style.height = '500px';
+            container.style.padding = '20px';
+            container.style.border = '2px solid black';
+
+            container.appendChild(tagCloud);
+            document.body.appendChild(container);
+        </script>
+    </body>
+</html>
+

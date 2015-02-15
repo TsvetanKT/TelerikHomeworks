@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Functions Exercise 01</title>
+</head>
+<body>  
+    <h3>01.Exercise</h3>
+    <input type="button" value="appendChild" onClick="appendChildFunc()">
+    ->
+    <input type="button" value="removeChild" onClick="removeChildFunc()">
+    ->
+    <input type="button" value="addHandler" onClick="addHandlerFunc()">
+    ->
+    <input type="button" value="add100Divs" onClick="add100DivsFunc()">
+    ->
+    <input type="button" value="Clear" onClick="clearFunc()">
+    <hr/>
+    <div id="wrapper"></div>   
+    <script type="text/javascript" src="Exercise01.js"></script>
+    <script type="text/javascript">
+
+    // Create a module for working with DOM. The module should have the following functionality:
+    // -Add DOM element to parent element given by selector
+    // -Remove element from the DOM  by given selector
+    // -Attach event to given selector by given event type and event hander
+    // -Add elements to buffer, which appends them to the DOM when their count for some selector becomes 100
+    // -The buffer contains elements for each selector it gets
+    // -Get elements by CSS selector
+    // -The module should reveal only the methods
+    //     domModule = …
+    //     var div = document.createElement("div");
+    //     //appends div to #wrapper
+    //     domModule.appendChild(div,"#wrapper"); 
+    //     //removes li:first-child from ul
+    //     domModule.removeChild("ul","li:first-child"); 
+    //     //add handler to each a element with class button
+    //     domModule.addHandler("a.button", 'click',        
+    //                      function(){alert("Clicked")});
+    //     domModule.appendToBuffer("container", div.cloneNode(true));
+    //     domModule.appendToBuffer("#main-nav ul", navItem);
+
+        var div = document.createElement("div");
+        var inner = '<ul>' +
+                        '<li>Li 1</li>' +
+                        '<li class="button" style="color:red">Li 2</li>' +
+                        '<li>Li 3</li>' +
+                    '</ul>';
+
+        div.innerHTML += inner;
+
+        var appendChildFunc = function appendChild() {
+            domModule.appendChild(div, "#wrapper");
+        }
+        
+        var removeChildFunc = function removeChild() {
+            domModule.removeChild("ul", "li:first-child");
+        }
+        
+        var addHandlerFunc = function addHandler() {
+            domModule.addHandler(".button", 'click',
+                             function () { alert("Clicked") });
+        }
+        
+        var add100DivsFunc = function add100Divs() {
+            for (var i = 0; i < 100; i += 1) {
+            domModule.appendToBuffer('#wrapper', div.cloneNode(true));
+            }
+        }
+        
+        var clearFunc = function clear() {
+            location.reload();
+        }
+        
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>03.Task</title>
+    <style type="text/css">
+		.info{
+			font-size: 0.9em;
+			font-style: italic;
+			border: 1px solid orange;
+			display: block;
+			padding:5px 15px;
+			width: 250px;
+			margin: 0 auto;
+			text-indent: 0;
+		}
+
+		.message.success{
+			color: green;
+		}
+		.message.error{
+			color: red;
+		}
+		.message.error, .message.success{
+			display: none;
+		}
+
+		.student-item strong:before{
+			content: 'Name: ';
+		}
+
+		.student-item span:before{
+			content: ', Grade: ';
+		}
+	</style>
+</head>
+<body>
+	<h4>03.Task</h4>
+	<p>Using the REST API at 'localhost:3000/students' create a web application for managing students</p>
+	<ul>
+		<li>
+			The REST API provides methods as follows:
+			<ul>
+				<li>POST creates a new student</li>
+				<li>GET returns all students</li>
+				<li>DELETE deletes a student by Id</li>
+			</ul>
+		</li>
+		<li>
+			You may extend the demo for jQuery.ajax()
+		</li>
+	</ul>
+	<hr/>
+    <label for="tb-name">Name: </label>
+	<input id="tb-name" name="tb-name" type="text" />
+	<br/>
+	<label for="tb-grade">Grade: </label>
+	<input id="tb-grade" name="tb-grade" type="number" min='1' max='12'/>
+	<br/>
+	<button id='btn-add-student'>Add new</button>
+	<button id='btn-reload'>Reload</button>
+	<button id='btn-delete-student'>Delete by id</button>
+	<label for="student-id">ID: </label>
+	<input id="student-id" type="number" min='1' step='1'/>
+	<div class="messages">
+		<strong class="message success">
+		</strong>
+		<strong class="message error">
+		</strong>
+	</div>
+	<div id="students-container"></div>
+	<p class='info'>This web page should be run on a server (localhost or in WWW).</p>
+	<script src="libs/jquery-2.0.2.js"></script>
+	<script src="scripts/scripts.js">	</script>
+</body>
+</html>

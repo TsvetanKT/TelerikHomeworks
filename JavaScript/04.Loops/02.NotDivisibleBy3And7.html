@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>02.NotDivisibleBy3And7</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<p>02. Write a script that prints all the numbers from 1 to N, that are not divisible by 3 and 7 at the same time</p>
+	<input type="text" id="tb-number" />
+	<a href="#" id="btn-check-prime" onclick="onCalcFactBtnClick()">Generate result</a>
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+		function onCalcFactBtnClick() {
+			var stringBuilder = "";
+			var number = jsConsole.readInteger('#tb-number');
+			if (number > 1) {
+				for (var i = 1; i<=number; i++) {
+					if ((i%3!=0)||(i%7!=0)) {						
+						stringBuilder+= i + " ";
+					}
+				}	
+				jsConsole.writeLine(stringBuilder);						
+			}
+		}
+	</script>
+</body>
+</html>

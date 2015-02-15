@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>05.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>05.Write a function that replaces non breaking white-spaces in a text with "&amp;nbsp;"</p>
+    <hr/>
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var input = "We are living in an yellow submarine. We don't have anything else.";
+        jsConsole.writeLine(input);
+
+        var textToReplace = "&amp;nbsp;"; //&amp; displays &
+        jsConsole.writeLine(replaceWhiteSpace(input, textToReplace));
+
+        function replaceWhiteSpace(input, textToReplace) {
+            var splittedText = input.split(' ');
+
+            var result = splittedText.join(textToReplace);
+            return result;
+        }
+    </script>
+</body>
+</html>

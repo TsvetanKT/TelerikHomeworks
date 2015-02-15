@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>02.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+
+<body>
+	<p>02.Write a script that compares two char arrays lexicographically (letter by letter).</p>
+	<p>Reload the page to generate another array.</p>
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+
+		var arrFirst = new Array(5);
+		var arrSecond = new Array(5);
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		// Generating arrays with random characters
+		for (var i = 0; i < 5; i+=1) {
+			arrFirst[i] = possible.charAt(Math.floor(Math.random() * possible.length)); 
+			arrSecond[i] = possible.charAt(Math.floor(Math.random() * possible.length));
+		};
+		
+
+		jsConsole.writeLine('arrFirst = ' + arrFirst.join(', '));
+		jsConsole.writeLine('arrSecond = ' + arrSecond.join(', '));
+		jsConsole.writeLine('');
+
+		for (var j = 0; j < 5; j+=1) {
+			if (arrFirst[j]>arrSecond[j]) {
+				jsConsole.writeLine(arrFirst[j] + " is after " + arrSecond[j] + " lexicographyclly!");
+			}
+			else {
+				jsConsole.writeLine(arrFirst[j] + " is before " + arrSecond[j] + " lexicographyclly!");
+		}
+	}
+	</script>
+</body>
+
+</html>

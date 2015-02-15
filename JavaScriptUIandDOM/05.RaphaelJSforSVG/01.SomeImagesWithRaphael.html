@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Raphael HW</title>
+    </head>
+    <body>  
+        <h4>01.All Exercises</h4>
+        <p>Create some images using Raphael.</p>
+
+        <div id="raphael-container"></div> 
+
+        <script src="raphael-min.js"></script>
+        <script>
+            var paper = Raphael('raphael-container', 1000, 800);
+
+            //roundedRectangle(x, y, width, height, upper_left_corner, upper_right_corner, lower_right_corner, lower_left_corner)
+            Raphael.fn.roundedRectangle = function (x, y, w, h, r1, r2, r3, r4){
+                var array = [];
+                array = array.concat(["M",x,r1+y, "Q",x,y, x+r1,y]); //A
+                array = array.concat(["L",x+w-r2,y, "Q",x+w,y, x+w,y+r2]); //B
+                array = array.concat(["L",x+w,y+h-r3, "Q",x+w,y+h, x+w-r3,y+h]); //C
+                array = array.concat(["L",x+r4,y+h, "Q",x,y+h, x,y+h-r4, "Z"]); //D
+
+                return this.path(array);
+            };
+
+            // Telerik logo
+            paper.text(200, 50, 'Telerik')
+                .attr({ 'font-size': 60, 'font-family': 'Arial','font-weight':'bold'});
+            paper.text(305, 45, '®')
+                .attr({ 'font-size': 20,'font-weight':'bold'});
+            paper.text(235, 90, 'Develop experiences')
+                .attr({ 'font-size': 25});
+            paper.path('M20 40 l15 -15 l40 40 l-20 20 l-20 -20 l40 -40 l15 15')
+                .attr({ stroke: '#5CE600', 'stroke-width':10});
+
+            // You Tube logo
+            // Coudn't get the original font :(
+            paper.text(100, 200, 'You')
+                .attr({ 'font-size': 70, 'font-family': 'Calibri' , fill:'#4B4B4B'});
+            paper.roundedRectangle(155, 165, 150, 70, 20, 20, 20, 20).attr({fill: '#EC2828', stroke:'#EC2828'});
+
+            paper.text(230, 200, 'Tube')
+                .attr({ 'font-size': 70, 'font-family': 'Calibri' , fill:'white'});
+
+
+            //Spiral
+            var stringArray = [];
+            stringArray = stringArray.concat(['M700 400 ']);
+            for (i=0; i< 2720; i++) {
+              angle = 0.1 * i;
+              x=(1+angle)*Math.cos(angle);
+              y=(1+angle)*Math.sin(angle);
+              stringArray = stringArray.concat(['L', x+700, ' ', y+400, ' ']);;
+            }
+            //console.log(stringArray);
+            paper.path(stringArray).attr({ stroke: 'black', 'stroke-width':1});
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>04.LexicographProperty</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<p>04. Write a script that finds the lexicographically smallest and largest property in document, window and navigator objects.</p>
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+
+		function printAll(obj) {
+			var dashes = '--------------------------';
+			var min = ' ';
+			var max = ' ';
+			for (var property in obj) {
+				//jsConsole.writeLine('obj[' + property + '] = ' + obj[property]);
+				
+				if (obj[property]>max) {
+				max = obj[property];
+				}
+				
+				if (obj[property]<min) {
+				min = obj[property];
+				}
+			}
+			
+			jsConsole.writeLine(obj);
+			jsConsole.writeLine('Lexicographically smallest property: '+min);
+			jsConsole.writeLine('Lexicographically largest property: '+max);
+			jsConsole.writeLine(dashes);
+		}
+		
+		var doc = document;
+		var win = window;
+		var nav = navigator;
+		printAll(doc);
+		printAll(win);
+		printAll(nav);
+		
+	</script>
+</body>
+</html>

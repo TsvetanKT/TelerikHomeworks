@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.Chef", "01.Chef\01.Chef.csproj", "{DABBF14D-2BA3-428D-B4EC-64F43E61CC07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.VisitCell", "02.VisitCell\02.VisitCell.csproj", "{4D5C2BE9-1D30-4962-86D2-307C561B91C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.TheLoop", "03.TheLoop\03.TheLoop.csproj", "{4FE47072-F6C6-4771-973A-DF3A4B3CB16B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DABBF14D-2BA3-428D-B4EC-64F43E61CC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABBF14D-2BA3-428D-B4EC-64F43E61CC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABBF14D-2BA3-428D-B4EC-64F43E61CC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABBF14D-2BA3-428D-B4EC-64F43E61CC07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D5C2BE9-1D30-4962-86D2-307C561B91C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D5C2BE9-1D30-4962-86D2-307C561B91C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D5C2BE9-1D30-4962-86D2-307C561B91C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D5C2BE9-1D30-4962-86D2-307C561B91C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE47072-F6C6-4771-973A-DF3A4B3CB16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE47072-F6C6-4771-973A-DF3A4B3CB16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE47072-F6C6-4771-973A-DF3A4B3CB16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE47072-F6C6-4771-973A-DF3A4B3CB16B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

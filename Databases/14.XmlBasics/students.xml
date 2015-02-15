@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="students.xslt"?>
+<students xmlns:students="urn:students">
+  <student>
+    <name>Grigor Ivanov</name>
+    <sex>m</sex>
+    <birthDate>1995-01-21</birthDate>
+    <phone>0881001</phone>
+    <email>grisho@abv.bg</email>
+    <course>qBasic</course>
+    <specialty>Old Programing</specialty>
+    <facultyNumber>123456</facultyNumber>
+    <examsTaken>
+      <exam>
+        <examName>MsDos</examName>
+        <tutor>prof. Cheburashka</tutor>
+        <score>4.3</score>
+      </exam>
+      <exam>
+        <examName>Pascal</examName>
+        <tutor>prof. Cacheva</tutor>
+        <score>2.5</score>
+      </exam>
+    </examsTaken>
+    <enrolment>
+      <date>2009-06-13</date>
+      <score>4.5</score>
+    </enrolment>
+    <teacherEndorsments>
+      <endorsment>Mathematics</endorsment>
+      <endorsment>Mechanics</endorsment>
+    </teacherEndorsments>
+  </student>
+  <student>
+    <name>Pepa Ceceva</name>
+    <sex>f</sex>
+    <birthDate>1985-07-05</birthDate>
+    <phone>0881002</phone>
+    <email>pepa@yahoo.com</email>
+    <course>C#3</course>
+    <specialty>Modern Programing</specialty>
+    <facultyNumber>123457</facultyNumber>
+    <examsTaken>
+      <exam>
+        <examName>C#1</examName>
+        <tutor>prof. Kokov</tutor>
+        <score>5.8</score>
+      </exam>
+      <exam>
+        <examName>JavaScript</examName>
+        <tutor>prof. Korumbasheva</tutor>
+        <score>3.9</score>
+      </exam>
+    </examsTaken>
+    <enrolment>
+      <date>2009-11-01</date>
+      <score>5.5</score>
+    </enrolment>
+    <teacherEndorsments>
+      <endorsment>C#</endorsment>
+      <endorsment>JavaScript</endorsment>
+    </teacherEndorsments>
+  </student>
+</students>

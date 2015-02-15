@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>02.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>02.Write a function that reverses the digits of given decimal number.</p>
+    <p>Example: 256 -> 652</p>
+    <p>Reload the page to generate another result.</p>
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var number = Math.floor((Math.random() * 1000)) - 500;
+        reverseDigits(number);
+
+        var floater = Math.floor((Math.random() * 5));
+        number = Math.floor((Math.random() * 1000)) / floater
+        reverseDigits(number);
+
+        function reverseDigits(number) {
+            
+            var text = '';
+            var numStr = number.toString();
+            var counter = 0;
+
+            jsConsole.writeLine('Your number is: ' + number);
+
+            if (number < 0) {
+                //if number is negative, skip the minus
+                
+                for (counter = 1; counter < numStr.length; counter+=1) {
+                    text = numStr.substring(counter, counter + 1) + text;
+                }
+
+                text = '-'+text;
+            }
+
+            else {//if the number is zero or positive
+                for (counter = 0; counter < numStr.length; counter+=1) {
+                    text = numStr.substring(counter, counter + 1) + text;
+                }
+            }
+
+            jsConsole.writeLine('The reversed number is '+text);
+        }
+    </script>
+</body>
+</html>

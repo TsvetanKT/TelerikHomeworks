@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <meta charset="UTF-8">
+        <title>DOM homework - Exercise 01</title>
+</head>
+<body>  
+        <div>01.Write a script that selects all the div nodes that are directly inside other div elements
+            <ul>
+                <li>Create a function using querySelectorAll()</li>
+                <li>reate a function using getElementsByTagName()</li>
+            </ul>
+        </div>
+        <div id="MainDiv">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>END</div>
+        </div>
+        <div>Not directly inside other div elements</div>
+        <script type="text/javascript">
+
+                function queryExtractor() {
+                        var queryInerDivs = document.querySelectorAll('div>div');
+                        return queryInerDivs;
+                }
+                
+                function getElementsExtractor() {
+                        var allDivs = document.getElementById('MainDiv');
+                        var innerDivs = allDivs.getElementsByTagName('div');
+                        return innerDivs;
+                }
+
+                function printNodeList(nodeList) {
+                        for (var i = 0, len = nodeList.length; i < len; i += 1) {
+                        console.log(nodeList[i].innerHTML.trim());
+                        }
+                }
+
+                printNodeList(queryExtractor());
+                printNodeList(getElementsExtractor());
+                
+        </script>
+</body>
+</html>
+

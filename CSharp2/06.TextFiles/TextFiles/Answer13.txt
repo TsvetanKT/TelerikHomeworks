@@ -1,0 +1,4 @@
+del 5
+remove 2
+HERE 2
+not 1

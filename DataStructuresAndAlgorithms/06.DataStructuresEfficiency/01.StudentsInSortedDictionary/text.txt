@@ -1,0 +1,14 @@
+Kiril  | Ivanov   | C#
+Stefka | Nikolova | SQL
+Stela  | Mineva   | Java
+Milena | Petrova  | C#
+Joko   | Mokof    | C#
+Koko   | Koleff   | SQL
+Cecka  | Petcka   | qBasic
+Ceca   | Meca     | C#
+Asen   | Asenof   | JavaScript
+Koicho | Koinare  | qBasic
+Kozmo  | Zoref    | JavaScript
+Filip  | Kolev    | qBasic
+Ivan   | Tonef    | qBasic
+Ivan   | Grigorov | C#

@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>06.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>06.Write a function that groups an array of persons by age, first or last name. The function must return an associative array, with keys - the groups, and values -arrays with persons in this groups</p>
+    <p>Use function overloading (i.e. just one function)</p>
+    <p>var persons = {…};<br/>var groupedByFname = group(persons, 'firstname');<br/>var groupedByAge= group(persons, 'age');</p>
+    <hr/>    
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var persons = [
+            {
+                firstName: "Ivo",
+                lastName: "Ivanov",
+                age: 18
+            }, {
+                firstName: "Ivo",
+                lastName: "Dimov",
+                age: 44
+            }, {
+                firstName: "Stefan",
+                lastName: "Dimov",
+                age: 67
+            }, {
+                firstName: "Petar",
+                lastName: "Zaxariev",
+                age: 23
+            }
+        ];
+
+        function HasKey(obj, key) {
+            for (var prop in obj) {
+                if (prop == key) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        function GroupBy(arr, prop) {
+            var result = {};
+            var key;
+
+            result.print = function () {
+
+                for (var obj in result) {
+
+                    if (obj == "print") {continue;}
+
+                    jsConsole.writeLine("Key: " + obj);
+                    jsConsole.writeLine("Persons:");
+
+                    for (var person in result[obj]) {
+                        var currPerson = result[obj][person];
+                        jsConsole.writeLine("FirstName: " + currPerson.firstName + "; LastName: " + currPerson.lastName + "; Age: " + currPerson.age);
+                    }
+                }
+            }
+            
+            switch (prop) {
+                case "firstName":
+                case "lastName":
+                case "age":
+                    for (var person in persons) {
+
+                        key = arr[person][prop];
+
+                        if (HasKey(result, arr[person][prop])) {
+
+                            result[key].push(arr[person]);
+                        }
+
+                        else {
+                            result[key] = [];
+                            result[key].push(arr[person]);
+                        }
+                    }
+                    break;
+
+                default:
+                    jsConsole.writeLine("Error!");
+            }
+        
+            return result;
+        }
+        
+        var people = GroupBy(persons, "firstName");
+        jsConsole.writeLine("Group by First Name:");
+        people.print();
+        jsConsole.writeLine("");
+        
+        people = GroupBy(persons, "lastName");
+        jsConsole.writeLine("Group by Last Name:");
+        people.print();
+        jsConsole.writeLine("");
+        
+        people = GroupBy(persons, "age");
+        jsConsole.writeLine("Group by Age:");
+        people.print();
+        var a = 3;
+    </script>
+</body>
+</html>

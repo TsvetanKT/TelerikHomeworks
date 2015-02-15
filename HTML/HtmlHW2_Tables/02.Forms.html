@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>03.Web Page Using Forms</title>
+		
+		<style type="text/css" media="screen">
+			.bold
+            {
+				font-weight: bold;
+			}
+			
+		/*The idea is the button to be with an image*/
+			.customSubmit{
+				background: url("img/02submit_button.png") no-repeat;
+				width: 87px;
+				height: 32px;
+				border: none;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<form action="#" method="post">
+					<label for="name">Member name : </label>
+					<input type="text" name="name" value="" id="name"/> <span class="bold">*req</span> <br />
+					
+					<label for="email">Email : </label>
+					<input type="text" name="name" value="" id="email"/> <span class="bold">*req</span> <br />
+					
+					<label for="school">School : </label>
+					<input type="text" name="name" value="" id="school"/> <span class="bold">*req</span> <br />
+						
+					<input type="submit" class="customSubmit" value="" />
+			</form>
+		</div>
+	</body>
+</html>

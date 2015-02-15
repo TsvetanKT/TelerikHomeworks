@@ -1,0 +1,36 @@
+/* CSS file */
+table 
+{
+	background-color:#505050; text-align:left; font-family:Arial, sans-serif;
+}
+
+.white_text 
+{
+	color:white; font-style:italic;
+}
+
+.yellow_text 
+{
+	color:#BAA44E;
+}
+
+.gray_text 
+{
+	color:#A0A0A0; 
+}
+
+.orange_text 
+{
+	color:orange;
+}
+
+td 
+{
+	vertical-align:top;
+}
+
+#support 
+{
+color:red; font-weight:bold;
+}
+

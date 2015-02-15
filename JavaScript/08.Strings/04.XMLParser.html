@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>04.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>04.You are given a text. Write a function that changes the text in all regions:</p>
+    <p>&#60upcase&#62text&#60/upcase&#62 to uppercase.<br/>&#60lowcase&#62text&#60/lowcase&#62 to lowercase<br/>&#60mixcase&#62text&#60/mixcase&#62 to mix casing(random)</p>
+    <p>We are &#60mixcase&#62living&#60/mixcase&#62 in a &#60upcase&#62yellow submarine&#60/upcase&#62. We &#60mixcase&#62don't&#60/mixcase&#62 have &#60lowcase&#62anything&#60/lowcase&#62 else.</p>
+    <p>The expected result:<br/>We are LiVinG in a YELLOW SUBMARINE. We dOn'T have anything else.<br/>Regions can be nested</p>
+    <hr/>
+    <p>Reload the page to observe diferences.</p>
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        
+        function removeAdditionalWhiteSpaces(text) {
+                return text.replace(/\s{2,}/ig, ' ');
+            }
+
+            function removeAllTags(text) {
+                return text.replace(/<.+?case>/ig, '');
+            }
+            
+            function applyTags(text, openTagName, closeTagName, action) {
+                var openTagIndexes = [];
+
+                var lastOccurance = text.indexOf(openTagName), nextOpenTagIndex, nextCloseTagIndex, originalBlock, updateBlock;
+                if (lastOccurance > -1) {
+                    openTagIndexes.push(lastOccurance);
+                }
+
+                while(openTagIndexes.length > 0) {
+             
+                    lastOccurance = openTagIndexes[openTagIndexes.length - 1];
+                    nextOpenTagIndex = text.indexOf(openTagName, lastOccurance + openTagName.length);
+                    nextCloseTagIndex = text.indexOf(closeTagName, lastOccurance + openTagName.length);
+
+                    if (nextCloseTagIndex < nextOpenTagIndex || nextOpenTagIndex === -1) {
+                        originalBlock = text.substring(lastOccurance, nextCloseTagIndex + closeTagName.length);
+                        updateBlock = removeAllTags(originalBlock);
+                        updateBlock = removeAdditionalWhiteSpaces(updateBlock);
+                        updateBlock = action(updateBlock);
+
+
+                        text = text.replace(originalBlock, updateBlock);
+                        openTagIndexes.pop();
+
+                        if (nextOpenTagIndex !== -1 && openTagIndexes.length === 0) {
+                            openTagIndexes.push(text.indexOf(openTagName, lastOccurance + openTagName.length));
+                        }
+
+                    }
+                    else {
+                        openTagIndexes.push(nextOpenTagIndex);
+                    }
+                }
+
+                text = removeAdditionalWhiteSpaces(text).trim();
+                return text;
+            }
+
+            function applyUpCaseTags(text) {
+                return text.toUpperCase();
+            }
+
+            function applyLowCaseTags(text) {
+                return text.toLowerCase();
+            }
+
+            function applyMixCaseTags(text) {
+                var result = '', i, tmpRand;
+                for (i = 0; i < text.length; ++i) {
+                    tmpRand = parseInt(Math.random() * 2);
+                    if (tmpRand === 0) {
+                        result += text[i].toUpperCase();
+                    }
+                    else {
+                        result += text[i].toLowerCase();
+                    }
+                }
+                return result;
+            }
+
+            var text = "We are <mixcase>living</mixcase> in a <upcase>yellow submarine</upcase>. We <mixcase>don't</mixcase> have <lowcase>anything</lowcase> else.";
+            text = applyTags(text, '<upcase>', '</upcase>', applyUpCaseTags);
+            text = applyTags(text, '<lowcase>', '</lowcase>', applyLowCaseTags);
+            text = applyTags(text, '<mixcase>', '</mixcase>', applyMixCaseTags);
+
+            jsConsole.writeLine(text);
+    </script>
+</body>
+</html>

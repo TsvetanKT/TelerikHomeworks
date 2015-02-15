@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Classical OOP Ex.01</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>  
+    <div>
+        <p>01.Create a module for drawing shapes using Canvas. Implement the following shapes:</p>
+        <ul>
+            <li>Rect, by given position (X, Y) and size (Width, Height)</li>
+            <li>Circle, by given center position (X, Y) and radius (R)</li>
+            <li>Line, by given from (X1, Y1) and to (X2, Y2) positions</li>
+        </ul>
+    </div>
+    <hr/>
+    <canvas id="canvas" width="1000" height="600"></canvas>  
+    <script type="text/javascript" src="Exercise01.js"></script>
+    <script type="text/javascript">
+    // 01.Create a module for drawing shapes using Canvas. Implement the following shapes:
+    // -Rect, by given position (X, Y) and size (Width, Height)
+    // -Circle, by given center position (X, Y) and radius (R)
+    // -Line, by given from (X1, Y1) and to (X2, Y2) positions
+
+    var paper = new CanvasModule('#canvas');
+
+    paper.drawCircle({x: 225, y: 230}, 60, 5, 'blue', 'red');
+    paper.drawCircle({x: 425, y: 230}, 65, 10, 'purple', 'lightgreen');
+
+    // Rect with default line width, stroke color and fill color.
+    paper.drawRect({x: 300, y: 230}, 40, 140); 
+    paper.drawRect({x: 150, y: 400}, 350, 100, 0, 'white', 'yellow');
+    paper.drawLine({x: 170, y: 400}, {x: 210, y: 480}, 5, 'white');
+    paper.drawLine({x: 210, y: 480}, {x: 250, y: 400}, 5, 'white');
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Combo Box</title>
+	<style>
+        ul {
+            list-style-type: none;
+            width: 200px;
+        }
+
+        li {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid black;
+            border-radius: 15px;
+        }
+
+        li:hover {
+            background-color: lightblue;
+        }
+
+        img {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+	<script type="text/x-handlebars-template" id="combo-template">
+	    <div class="person-item" id="person-item-{{id}}">
+	        <strong class="person-name">{{name}}</strong>
+            <br/>
+	        <p class="person-age">Age: {{age}}</p>
+	        <img src="{{avatarUrl}}" width="100px"/>
+	    </div>
+	</script>
+	<div id="boxes"></div>
+    <script src="libs/require.js" data-main="modules/app"></script>
+</body>
+</html>

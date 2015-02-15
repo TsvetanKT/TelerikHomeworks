@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>05.Exercise</title>
+    <link href='styles/js-console.css' rel='stylesheet' />
+</head>
+
+<body>
+    <p>05.Sorting an array means to arrange its elements in increasing order. Write a script to sort an array. </p>
+    <p>Use the 'selection sort' algorithm: Find the smallest element, move it at the first position, find the smallest from the rest, move it at the second position, etc.Hint: Use a second array</p>
+    <br />
+    <p>Reload the page to generate another array.</p>
+    <div id='js-console'></div>
+    <script src='scripts/js-console.js'></script>
+    <script>
+
+        var arrayInt = new Array(10);
+        for (var i = 0; i < 10; i += 1) {
+            arrayInt[i] = Math.floor((Math.random() * 9));
+        };
+
+        jsConsole.writeLine('arr = ' + arrayInt.join(', '));
+
+        var currnetSmallestElement = arrayInt[0];
+        for (var i = 0; i < arrayInt.length; i++) {
+            currnetSmallestElement = arrayInt[i];
+            var tempIndex = i + 1;
+            var indexOftheSmallest = 0;
+            var enteredInIfInTheSecondLoop = false;
+
+            while (tempIndex < arrayInt.length) {
+                if (currnetSmallestElement > arrayInt[tempIndex]) {
+                    currnetSmallestElement = arrayInt[tempIndex];
+                    indexOftheSmallest = tempIndex;
+                    tempIndex++;
+                    enteredInIfInTheSecondLoop = true;
+                }
+
+                else {
+                    tempIndex++;
+                }
+            }
+            if (enteredInIfInTheSecondLoop) {
+                var tempVar = arrayInt[i];
+                arrayInt[i] = currnetSmallestElement;
+                arrayInt[indexOftheSmallest] = tempVar;
+            }
+        }
+
+        jsConsole.writeLine();
+        jsConsole.write('Sorted: ');
+
+        if (arrayInt.length == 1) {
+            jsConsole.write('{' + arrayInt[0] + '}');
+        }
+
+        else {
+            for (var i = 0; i < arrayInt.length; i++) {
+                if (i == 0) {
+                    jsConsole.write('{' + arrayInt[i] + ', ');
+                }
+
+                else if (i < arrayInt.length - 1) {
+                    jsConsole.write(arrayInt[i] + ', ');
+                }
+
+                else {
+                    jsConsole.write(arrayInt[i] + '}');
+                    jsConsole.writeLine();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

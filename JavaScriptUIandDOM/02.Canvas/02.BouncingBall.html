@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas - Exercise 02</title>
+</head>
+<body>  
+    <h4>02.Exercise</h4>
+    <p>Draw a circle that flies inside a box.</p>
+    <ul>
+        <li>When it reaches an edge, it should bounce that edge.</li>
+    </ul>
+    <canvas id="canvas" width="800" height="600" style="border:3px solid black;">
+        Canvas not supported
+    </canvas>
+    <br/>
+    <input type="button" value="Reload Page for Random position and Speed" onClick="window.location.reload()">
+    <input type="button" value="Speed UP" onClick="speedUp()">
+    <input type="button" value="Speed DOWN" onClick="speedDown()">
+
+    <script type="text/javascript">
+        var theCanvas = document.getElementsByTagName("canvas")[0];
+        var ctx = theCanvas.getContext('2d');
+        var w = theCanvas.width;
+        var h = theCanvas.height;
+        var r = 20;
+        var x = Math.floor((Math.random() * w + (3 * r))) - (3 * r);
+        var y = Math.floor((Math.random() * h + (3 * r))) - (3 * r); 
+        var acceleration = 1.3;
+        var xMove = Math.floor((Math.random() * 10) - 5);
+        var yMove = Math.floor((Math.random() * 10) - 5);
+
+        function drawBall(x, y, r, scaleX, scaleY, ballColor, strokeColor) {
+            ctx.beginPath();
+            ctx.fillStyle = ballColor;
+            ctx.strokeStyle = strokeColor;
+            ctx.scale(scaleX, scaleY);
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.lineWidth = 1;
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        function ballEngine() {
+            ctx.clearRect(0, 0, w, h);
+            if (x + r >= w) {
+                xMove *= -1;
+            }
+
+            if (x - r <= 0) {
+                xMove *= -1;
+            }
+
+            if (y + r > h) {
+                yMove *= -1;
+            }
+
+            if (y - r <= 0) {
+                yMove *= -1;
+            }
+            
+            x += xMove;
+            y += yMove;
+            drawBall(x, y, r, 1, 1, 'blue', 'black');
+            requestAnimationFrame(ballEngine);
+        }
+
+        // There may be bugs in very high speeds.
+        function speedUp() {
+            xMove *= acceleration;
+            yMove *= acceleration;
+        }
+
+        function speedDown() {
+            xMove /= acceleration;
+            yMove /= acceleration;
+        }
+
+        ballEngine();
+
+    </script>
+</body>
+</html>
+

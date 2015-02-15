@@ -1,0 +1,176 @@
+
+/* 01. Create a database with two tables: Persons(Id(PK), FirstName, LastName, SSN) and Accounts(Id(PK), PersonId(FK),
+	Balance). Insert few records for testing. Write a stored procedure that selects the full names of all persons.*/
+
+CREATE TABLE Persons (
+        PersonId INT IDENTITY,
+        FirstName VARCHAR(50),
+        LastName VARCHAR(50),
+        SSN VARCHAR(50)
+        CONSTRAINT PK_PersonsID PRIMARY KEY(PersonsID)
+)
+GO
+ 
+CREATE TABLE Accounts (
+        AccountId INT IDENTITY,
+        PersonId INT,
+        Balance money
+        CONSTRAINT PK_AccountID PRIMARY KEY(AccountID)
+        CONSTRAINT FK_PersonID FOREIGN KEY(PersonID)
+                REFERENCES Persons(PersonID)
+)
+GO
+ 
+INSERT INTO Persons(FirstName, LastName, SSN)
+VALUES ('Joe', 'Cocker', 123456)
+INSERT INTO Persons(FirstName, LastName, SSN)
+VALUES ('Krum', 'Mitrushev', 222222)
+INSERT INTO Persons(FirstName, LastName, SSN)
+VALUES ('Maria', 'Joneva', 500000)
+INSERT INTO Persons(FirstName, LastName, SSN)
+VALUES ('Kozmo', 'Nekoisi', 100000)
+INSERT INTO Persons(FirstName, LastName, SSN)
+VALUES ('Sesil', 'Karatanceva', 456789)
+INSERT INTO Accounts(Balance, PersonId)
+VALUES (5, 1)
+INSERT INTO Accounts(Balance, PersonId)
+VALUES (10000, 2)
+INSERT INTO Accounts(Balance, PersonId)
+VALUES (256, 3)
+INSERT INTO Accounts(Balance, PersonId)
+VALUES (7000000, 4)
+INSERT INTO Accounts(Balance, PersonId)
+VALUES (1000000, 5
+GO
+
+-------------------------------------------------------------------
+
+
+CREATE PROC usp_SelectFullNames
+AS
+	SELECT FirstName + ' ' + LastName AS [Full Name]
+	FROM Persons
+GO
+
+--EXEC usp_SelectFullNames
+
+
+
+/* 02. Create a stored procedure that accepts a number as a parameter and returns all persons who 
+	have more money in their accounts than the supplied number.*/
+
+CREATE PROC usp_PersonsWithMoreMoneyThan(@money int)
+AS
+	SELECT p.FirstName + ' ' + p.LastName AS [Full Name]
+	FROM Persons p
+	JOIN Accounts a 
+		ON p.PersonId = a.PersonId
+	WHERE 
+		a.Balance > @money
+	
+GO
+--EXEC usp_PersonsWithMoreMoneyThan 999999
+
+
+/* 03. Create a function that accepts as parameters – sum, yearly interest rate and number of months. 
+	It should calculate and return the new sum. Write a SELECT to test whether the function works as expected.*/
+
+CREATE PROCEDURE usp_calculateSumWithInterest 
+	@sum money,
+	@yearlyInterest float,
+	@months int
+	AS
+SELECT (@sum * @yearlyInterest / 12 * @months) + @sum AS [Sum with interest]
+
+--EXEC usp_calculateSumWithInterest   @sum = 1000, @yearlyInterest = 1.20, @months = 1
+
+
+/* 04. Create a stored procedure that uses the function from the previous example to give an interest to a 
+	person's account for one month. It should take the AccountId and the interest rate as parameters.*/
+
+CREATE PROCEDURE usp_MonthInterest 
+	@accountId int, 
+	@interest float
+AS
+DECLARE @accBalance money
+SELECT @accBalance = a.Balance
+FROM Accounts a
+WHERE @accountId = a.PersonId
+
+EXEC usp_calculateSumWithInterest 
+	@sum = @accBalance,
+	@yearlyInterest = @interest, 
+	@months = 1
+
+
+--EXEC usp_MonthInterest @accountId = 1, @interest = 1.2
+
+
+/* 05. Add two more stored procedures WithdrawMoney( AccountId, money) and DepositMoney (AccountId, money) 
+	that operate in transactions.*/
+
+CREATE PROCEDURE usp_WithdrawMoney 
+	@accountId int, 
+	@money money
+AS
+BEGIN TRAN
+	UPDATE Accounts
+	SET Balance -= @money
+	WHERE PersonId = @accountId
+COMMIT
+
+CREATE PROCEDURE usp_DepositMoney 
+	@accountId int, 
+	@money money
+AS
+BEGIN TRAN
+	UPDATE Accounts
+	SET Balance += @money
+	WHERE PersonId = @accountId
+COMMIT
+
+--EXEC usp_WithdrawMoney @accountId = 1, @money = 5000
+--EXEC usp_DepositMoney @accountId = 1, @money = 5000
+
+
+/* 06. Create another table – Logs(LogID, AccountID, OldSum, NewSum). Add a trigger to the Accounts table 
+	that enters a new entry into the Logs table every time the sum on an account changes.*/
+
+CREATE TABLE Logs
+(
+	LogId int
+	PRIMARY KEY CLUSTERED
+	IDENTITY(1, 1),
+	AccountId int
+	FOREIGN KEY REFERENCES Accounts(Id),
+	OldSum money,
+	NewSum money
+)
+GO
+
+CREATE TRIGGER LogTransaction
+	ON Accounts
+	AFTER UPDATE
+	AS
+	IF EXISTS(SELECT * FROM DELETED)
+	BEGIN
+		DECLARE @personId int, @balanceBefore money, @balanceAfter money
+		SELECT @personId = del.PersonId, 
+			@balanceBefore = del.Balance FROM deleted del
+		SELECT @balanceAfter = ins.Balance FROM inserted ins
+		INSERT INTO Logs
+		VALUES (@personId, @balanceBefore, @balanceAfter)
+	END
+GO
+
+
+--EXEC dbo.usp_WithdrawMoney 1, 500
+
+
+
+/* 07. Define a function in the database TelerikAcademy that returns all Employee's names (first or middle or last name)
+	 and all town's names that are comprised of given set of letters. 
+	 Example 'oistmiahf' will return 'Sofia', 'Smith', … but not 'Rob' and 'Guy'.*/
+
+ --TODO
+

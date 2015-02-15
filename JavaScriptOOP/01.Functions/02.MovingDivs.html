@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Functions Exercise 02</title>
+    <style>
+        .circle {
+            border-radius: 5px;
+            width: 70px;
+            height: 50px;
+            position: absolute;
+            text-align: center;
+            font-weight: bold;
+            line-height: 50px;  
+        }
+    </style>
+</head>
+<body>
+    <h4>02.Exercise</h4>
+    <button id="ellipses" >Ellipse divs ++</button>
+    <button id="rectangles">Rectangle divs ++</button>
+    <input type="button" value="Clear" onClick="window.location.href=window.location.href">
+    <hr />
+    <div id="wrapper"></div>
+    <script src="Exercise02.js"></script>
+    <script>
+    // 2.Create a module that works with moving div elements. Implement functionality for:
+    // Add new moving div element to the DOM
+    // The module should generate random background, font and border colors for the div element
+    // All the div elements are with the same width and height
+    // The movements of the div elements can be either circular or rectangular
+    // The elements should be moving all the time
+    
+        var buttonCir = document.getElementById('ellipses'),
+            buttonRect = document.getElementById('rectangles');
+
+        function moveEllipse() {
+            movingShapes.add('ellipse');
+        }
+
+        function moveRect() {
+            movingShapes.add('rect');
+        }
+
+        buttonCir.addEventListener('click', moveEllipse, false);
+        buttonRect.addEventListener('click', moveRect, false);
+
+    </script>
+</body>
+</html>

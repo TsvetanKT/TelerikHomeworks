@@ -1,0 +1,41 @@
+body, ul, li, div, label 
+{
+	margin:0;
+	padding:0;
+}
+body
+{		
+	ul 
+	{
+		position:relative;
+		top:10px;
+		left:10px;
+		list-style:none;
+
+		li 
+		{ 
+			display:inline;
+
+			input[type="radio"] 
+			{
+				display:none;
+				&:checked +label div 
+				{
+					display:block;
+				}
+			}
+			label 
+			{
+				div.photo 
+				{
+					position:absolute;
+					display:none;
+					top:200px;
+					left:0;
+				}
+			}
+		}
+	}
+}
+
+

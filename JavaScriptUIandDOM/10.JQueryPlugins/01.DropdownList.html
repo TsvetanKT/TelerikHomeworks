@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>01.DropdownList</title>
+</head>
+<body>
+    <p>01.Create a jQuery plugin for creating dropdown list</p>
+    <ul>
+        <li>And make it work as SELECT node</li>
+        <li>Selecting an one of the generated LI nodes, selects the corresponding OPTION node</li>
+        <li>So $('#dropdown:selected') works</li>
+    </ul>
+    <hr />
+    <select id="dropdown">
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+    </select>
+ 
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+
+        (function($){
+            $.fn.dropdown = function(){    
+                var $this = $(this);
+                $this.css('display', 'none');
+                var numberOfOptions = $this.children().length;
+
+                var internalString = '<div class="dropdown-list-container"><ul class="dropdown-list-options">';
+                var currentOption = $this.children().first();
+
+                internalString += '<li class="dropdown-list-option" data-value="0">' + currentOption.text() + '</li>';
+
+                // Acording to this http://jsperf.com/jquery-append-vs-string-concat/2
+                // string concat works best.
+                for (var i = 1; i < numberOfOptions; i += 1) {
+                    currentOption = currentOption.next();
+                    internalString += '<li class="dropdown-list-option" data-value="' + i +'">' + currentOption.text() + '</li>';
+                }
+
+                $this.after(internalString);
+
+                function onListItemClick(){
+
+                    // 'dropdown:selected' is invalid id so i used 'selected'
+                    $('#selected').removeAttr('id');
+                    var theValue = parseInt($(this).attr('data-value')) + 1;
+                    var strValue = 'option[value=' + theValue +']';
+                    console.log(strValue + ' is selected.');
+                    $(strValue).attr('id', 'selected');
+                }
+
+                $('.dropdown-list-options').on('click', 'li', onListItemClick);
+
+                return $this;
+            }
+        }(jQuery));
+
+        $('#dropdown').dropdown();
+
+
+
+    </script>
+</body>
+</html>

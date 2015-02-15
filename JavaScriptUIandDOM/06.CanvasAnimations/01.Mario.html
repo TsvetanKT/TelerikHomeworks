@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  	<meta charset="UTF-8">
+    <title>Animation Mario</title>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container {
+        background-image:url('images/mario_background.png');
+		background-color:#cccccc;
+        display: inline-block;
+        width: 800px;
+        height: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="kinetic-v5.1.0.min.js"></script>
+    <script defer="defer">
+		var stage = new Kinetic.Stage({
+			container: 'container',
+			width: 800,
+			height: 600
+		});
+
+		var layer = new Kinetic.Layer();
+		var imageObj = new Image();
+		imageObj.onload = function() {
+			var mario = new Kinetic.Sprite({
+				x: 0,
+				y: 417,
+				image: imageObj,
+				animation: 'idle',
+				animations: {
+					idle: [
+						// x, y, width, height (17 frames)
+						//0, 10, 80, 130,
+						0, 289, 80, 130,
+						80, 289, 80, 130,
+						160, 285, 80, 130,
+						240, 285, 80, 130,
+						320, 285, 80, 130,
+						400, 285, 80, 130,
+						480, 285, 80, 130,
+						560, 285, 80, 130,
+						655, 285, 80, 130,
+						735, 285, 80, 130,
+						820, 285, 80, 130,
+						905, 285, 80, 130,
+						980, 285, 80, 130,
+						1055, 285, 80, 130,
+						1135, 285, 75, 130,
+						1210, 285, 75, 130,
+						1290, 285, 75, 130
+					]
+				},
+				frameRate: 7, //7
+				frameIndex: 0
+			});
+
+			// add the shape to the layer
+			layer.add(mario);
+
+			// add the layer to the stage
+			stage.add(layer);
+
+			// start sprite animation
+			mario.start();
+
+			var anim = new Kinetic.Animation(function(frame) {
+				mario.setX(frame.time / 25);  // lesser than 25 -> faster movement
+			}, layer).start();
+		};
+
+		imageObj.src = 'images/sprite.png';
+    </script>
+  </body>
+</html>      

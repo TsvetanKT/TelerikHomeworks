@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>06.Exercise</title>
+    <link href='styles/js-console.css' rel='stylesheet' />
+</head>
+
+<body>
+    <p>06.Write a program that finds the most frequent number in an array.</p>
+    <p>Example: {4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3} -> 4 (5 times)</p>
+    <br />
+    <p>Reload the page to generate another array.</p>
+    <div id='js-console'></div>
+    <script src='scripts/js-console.js'></script>
+    <script>
+
+        var arrayInt = new Array(10);
+        for (var i = 0; i < 10; i += 1) {
+            arrayInt[i] = Math.floor((Math.random() * 9));
+        };
+
+        jsConsole.writeLine('arr = ' + arrayInt.join(', '));
+
+        var count = 1;
+        var finalCount = 1;
+        var currentElement = arrayInt[0];
+        var finalElement = 0;
+        for (var i = 0; i < arrayInt.length; i+=1) {
+            count = 1;
+            currentElement = arrayInt[i];
+            var tempIndex = i + 1;
+            while (tempIndex < arrayInt.length) {
+                if (arrayInt[tempIndex] == currentElement) {
+                    count+=1;
+                }
+
+                tempIndex+=1;
+            }
+
+            if (count > finalCount) {
+                finalCount = count;
+                finalElement = currentElement;
+            }
+        }
+
+        jsConsole.writeLine();
+        if (finalCount > 1) {
+            jsConsole.writeLine('The most frequent number is "' + finalElement + '" and it appears ' + finalCount + ' times!');
+        }
+
+        else {
+            jsConsole.writeLine('The most frequent number is "' + arrayInt[0] + '" and it appears 1 time!');
+        }
+    </script>
+</body>
+
+</html>

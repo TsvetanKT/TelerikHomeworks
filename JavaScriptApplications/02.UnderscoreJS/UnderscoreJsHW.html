@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>InderscoreJS Homework</title>
+</head>
+<body>
+	<div id="output"></div>
+	<script src="libs/underscore-min.js"></script>
+	<script>
+
+        // This function makes console.log to edit html.
+        // If deleted, console.log will act normaly.
+        (function () {
+            var old = console.log;
+            var logger = document.getElementById('output');
+            console.log = function (message) {
+                if (typeof message == 'object') {
+                    logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+                } else {
+                    logger.innerHTML += message + '<br />';
+                }
+            }
+        })();
+
+
+		var Student = (function () {
+        	function Student(fname, lname, age, marks) {
+        		this.fname = fname;
+        		this.lname = lname;
+        		this.age = age;
+        		this.marks = marks;
+        	}
+
+        	Student.prototype = {
+        		avarageMark: function(item) {
+    				return _.reduce(this.marks, function(memo, num) {
+    					return memo + num;
+    				}, 0) / this.marks.length;
+        		},
+
+        		toString: function() {
+        			return this.fname + ' ' + this.lname;
+        		}
+        	}
+
+        	return Student;
+
+        }());
+
+		var students = [
+            new Student('Kifla', 'iKifla', 33, [2, 2, 2, 2, 2]), // The iKifla is back for our souls
+            new Student('Koko', 'Mokof', 26, [2, 3, 4, 5, 6]),
+            new Student('Aoko', 'Zokof', 26, [2, 3, 4, 5, 6]),
+			new Student('Zomo', 'Bezev', 40, [2, 2, 2, 3]),
+            new Student('Zomo', 'Bojev', 40, [2, 2, 2, 3]),
+            new Student('Jeffery', 'Moore', 23, [6, 5, 3, 5, 3]),
+			new Student('Joe', 'Cocker', 18, [6, 5, 6]),
+            new Student('Joez', 'Cocker', 18, [6, 5, 6]),
+            new Student('Joen', 'Cocker', 18, [6, 5, 6]),
+            new Student('Joek', 'Cocker', 18, [6, 5, 6]),
+            new Student('Zomo', 'Bozev', 40, [2, 2, 2, 3]),
+            new Student('Jayden', 'Nguyen', 41, [4, 2, 4, 6, 5]),
+            new Student('Dylan', 'Manning', 58, [6, 2]),
+            new Student('Jackson', 'Ball', 40, [3, 4, 5]),
+            new Student('Raymond', 'Gray', 29, [5, 6, 2, 4]),
+            new Student('Lula', 'Hernandez', 30, [5, 5, 3, 3, 5]),
+            new Student('Marie', 'Cross', 25, [2]),
+            new Student('Ray', 'Flores', 50, [3, 6]),
+            new Student('Henry', 'Phillips', 49, [6, 6, 6, 5]),
+            new Student('Jeffery', 'Moore', 28, [6, 5, 3, 5, 3]),
+            new Student('Peter', 'Park', 44, [5]),
+            new Student('Eleanor', 'Wade', 58, [4, 2, 6]),
+            new Student('Luke', 'Thompson', 54, [4, 4, 5, 2, 4]),
+            new Student('Gilbert', 'Clayton', 58, [5]),
+            new Student('Dale', 'Castillo', 52, [2, 5, 5]),
+            new Student('Sadie', 'Garcia', 28, [2, 2, 5, 4, 3]),
+            new Student('Frederick', 'Rodriquez', 47, [2, 5, 2, 4, 3]),
+            new Student('Willie', 'Price', 19, [4]),
+            new Student('Eugene', 'Lucas', 39, [3, 6, 4]),
+            new Student('Lillie', 'Hall', 27, [2, 2, 6, 3]),
+            new Student('Peter', 'Simon', 35, [3, 2, 6, 3]),
+            new Student('Allen', 'Roberts', 51, [5, 3, 4, 5, 5]),
+            new Student('Randall', 'Haynes', 40, [3]),
+            new Student('Elmer', 'Blair', 38, [2, 2, 6, 2]),
+            new Student('Shawn', 'Powers', 58, [3, 6, 6, 6]),
+            new Student('Jimmy', 'Holland', 27, [3]),
+            new Student('Flora', 'Fields', 23, [2, 5, 6, 5]),
+            new Student('Myrtie', 'Adkins', 64, [6, 4]),
+            new Student('Jonathan', 'Boyd', 24, [4, 3, 5]),
+            new Student('Blake', 'Anderson', 45, [2, 6, 6, 6]),
+            new Student('Addie', 'Simpson', 26, [4, 5, 6]),
+            new Student('Claudia', 'Rivera', 37, [6, 3, 6, 2]),
+            new Student('Helen', 'Clayton', 54, [3, 2, 3]),
+            new Student('Sean', 'Poole', 34, [2, 4, 5, 5]),
+            new Student('Cora', 'Chambers', 22, [3, 3, 6]),
+            new Student('Lucille', 'Lopez', 25, [3]),
+            new Student('Adelaide', 'Alvarado', 30, [3, 5, 4, 4]),
+            new Student('Nicholas', 'Lyons', 59, [5, 2]),
+            new Student('Norman', 'Hunter', 39, [6, 5, 5, 5]),
+            new Student('Charles', 'Walsh', 20, [4]),
+            new Student('Ethel', 'Freeman', 26, [4, 6, 4]),
+            new Student('Joseph', 'Goodman', 20, [2, 2]),
+            new Student('Tom', 'Cole', 63, [5, 3]),
+            new Student('Bessie', 'Ortega', 46, [5, 3, 5, 3, 4]),
+            new Student('Abbie', 'Morgan', 25, [2, 6, 4]),
+            new Student('Nicholas', 'Holloway', 34, [5, 6, 5, 5, 2]),
+            new Student('Janie', 'Kelley', 44, [6, 4, 2, 5]),
+            new Student('Jayden', 'Alvarado', 61, [2, 2, 3, 5, 6]),
+            new Student('Georgia', 'Fields', 59, [3]),
+            new Student('Rosetta', 'Butler', 49, [6, 2]),
+            new Student('Bradley', 'Goodman', 28, [4]),
+			new Student('Joko', 'Cocker', 18, [6,5,4])
+		];
+
+		//01.
+		console.log('01.Write a method that from a given array of students finds all students whose first name is before its last name alphabetically. Print the students in descending order by full name. Use Underscore.js');
+
+		function firstBeforeLastNameFunc(person) { 
+			return person.fname.toLowerCase() < person.lname.toLowerCase();
+		}
+
+		var firstBeforeLastName = _.filter(students, firstBeforeLastNameFunc);
+		var sorted = _.sortBy(firstBeforeLastName, 'fname');
+
+		_.each(sorted, function(item) { console.log(item); });
+		console.log('');
+
+
+		//02.	
+		console.log('02.Write function that finds the first name and last name of all students with age between 18 and 24. Use Underscore.js');
+
+		var studentsBetween18And24 = _.filter(students, function (st) {
+            return st.age >= 18 && st.age <= 24;
+        });
+        _.each(studentsBetween18And24, function (st) {
+            console.log(st.toString() + ' ' + st.age);
+        });
+        console.log('');
+
+
+        //03.
+        console.log('03.Write a function that by a given array of students finds the student with highest marks');
+
+		var bestStudent = _.max(students, function (st) {
+            return st.avarageMark();
+        });
+        console.log(bestStudent.toString() + ' ' + bestStudent.avarageMark().toFixed(2));  
+        console.log('');   
+
+
+        //04.
+        console.log('04.Write a function that by a given array of animals, groups them by species and sorts them by number of legs');
+
+        var Animal = (function () {
+        	function Animal(spicie, kind, legs) {
+        		this.spicie = spicie;
+        		this.kind = kind;
+        		this.legs = legs;
+        	}
+
+        	Animal.prototype = {
+        		toString: function() {
+        			return this.spicie + ' ' + this.kind +' with ' + this.legs + ' legs';
+        		}
+        	}
+
+        	return Animal;
+
+        }());
+
+        var animals = [
+            new Animal('Mammal', 'Human', 2),
+            new Animal('Mammal', 'Cat', 4),
+            new Animal('Insect', 'Centipede', 100),
+            new Animal ('Insect', 'Ant', 6),
+            new Animal('Insect', 'Scorpion', 8),
+            new Animal('Bird', 'Condor', 2),
+            ];
+
+        var orderedAnimalsBySpicie = _.groupBy(animals, 'spicie');
+
+        for (var prop in orderedAnimalsBySpicie) {
+            var sortedSpiciesByLegs = _.sortBy(orderedAnimalsBySpicie[prop], function (a) {
+                return a.legs;
+            });
+            orderedAnimalsBySpicie[prop] = sortedSpiciesByLegs;
+        }
+
+        _.each(orderedAnimalsBySpicie, function (a) {
+            console.log(a[0].spicie + 's:');
+            for (var i in a) {
+                console.log(a[i].toString());
+            }
+            console.log('');
+        });
+
+        //05.
+        console.log('05.By a given array of animals, find the total number of legs.\nEach animal can have 2, 4, 6, 8 or 100 legs');
+        
+        var allLegs = _.reduce(animals, function (memo, a) { 
+        	return memo + a.legs; 
+        }, 0);
+
+        console.log('The sum of legs of all animals is ' + allLegs);
+        console.log('');
+
+
+        //06.
+        console.log('06.By a given collection of books, find the most popular author (the author with the highest number of books)');
+
+        var Book = (function () {
+        	function Book(author, name) {
+        		this.author = author;
+        		this.name = name;
+        	}
+
+        	return Book;
+        }());
+
+        var books = [
+            new Book('God', 'The Holy Bible'),
+            new Book('Harper Lee', 'To Kill a Mockingbird'),
+            new Book('John Green', 'Looking for Alaska'),
+            new Book('Markus Zusak', 'The Book Thief'),
+            new Book('Deborah Harkness', 'The Book of Life'),
+            new Book('George R. R. Martin', 'A Song of Ice and Fire'),
+            new Book('George R. R. Martin', 'A Dance with Dragons'),
+            new Book('George R. R. Martin', 'A Storm of Swords')
+        ];
+
+        function mostPopular(array, property) {
+            var mostPopularName;
+            var mostPopularItem =_.countBy(array, function (b) {
+                return b[property];
+            });
+            
+            var valueOfMostPopularItem = _.max(mostPopularItem, function (a) {
+                return a;
+            });
+
+            for (var prop in mostPopularItem) {
+                if (mostPopularItem[prop] === valueOfMostPopularItem)
+                {
+                        mostPopularName = prop;
+                }
+            }
+
+            return {
+                item: mostPopularName,
+                value: valueOfMostPopularItem
+            };
+        }
+
+        var mostPopuarFromAuthors = mostPopular(books, 'author');
+        console.log('Most popular author is "' + mostPopuarFromAuthors.item + '" with ' + mostPopuarFromAuthors.value + ' books.');
+        console.log('');
+
+
+		//07.
+		console.log('07.By an array of people find the most common first and last name. Use underscore.');  
+
+        var mostPopularFirstName = mostPopular(students, 'fname');
+        var mostPopularLastNmale = mostPopular(students, 'lname');
+
+        console.log('Most popular first name is "' + mostPopularFirstName.item + '" -> ' 
+                                                   + mostPopularFirstName.value + ' times.');
+        console.log('Most popular last name is "' + mostPopularLastNmale.item + '" -> '
+                                                  + mostPopularLastNmale.value + ' times.');
+	</script>
+</body>
+</html>

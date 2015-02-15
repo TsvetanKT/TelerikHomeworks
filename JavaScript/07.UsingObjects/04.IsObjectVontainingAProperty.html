@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>04.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>04.Write a function that checks if a given object contains a given property</p>
+    <p>var obj  = …;<br/>var hasProp = hasProperty(obj, 'length');</p>
+    <hr/>      
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var arr = new Array(1, 2, 3, 4);
+        var point1 = { X: 0, Y: 3 };
+
+        var prop="length";
+        var hasProp = hasProperty(arr, prop); //checking if array has length
+        jsConsole.writeLine("Array has property " + prop+" -> "+hasProp);
+
+        hasProp = hasProperty(point1, prop);//checking if point has length
+        jsConsole.writeLine("Point has property " + prop + " -> " + hasProp);
+
+        prop = "X";
+        hasProp = hasProperty(arr, prop); //checking if array has property X
+        jsConsole.writeLine("Array has property " + prop + " -> " + hasProp);
+
+        hasProp = hasProperty(point1, prop); //checking if array has property X
+        jsConsole.writeLine("Point has property " + prop + " -> " + hasProp);
+
+        function hasProperty(obj, prop) {
+            if (obj.hasOwnProperty(prop)) {
+                return true;
+            }
+           return false;
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>02.InsertBeforeAndAfter</title>
+    <style>
+        .elementToSurround {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="elementToSurround">This element will be in the mid!</div>
+    </div>
+
+    <button id="addElementsButton">Click to add other elements</button>
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        $.prototype.appendNewElement = function (elementToAppend) {
+            $(this).after(elementToAppend);
+        }
+
+        $.prototype.prependNewElement = function (elementToPrepend) {
+            $(this).before(elementToPrepend);
+        }
+
+        var newElement = document.createElement('div');
+
+        $('#addElementsButton').on('click', function () {
+            var elementToPrepend = newElement.cloneNode(true);
+            $(elementToPrepend).addClass('prepended').text('Prepended');
+
+            var elementToAppend = newElement.cloneNode(true);
+            $(elementToAppend).addClass('appended').text('Appended');
+
+            $('.elementToSurround').appendNewElement(elementToAppend);
+            $('.elementToSurround').prependNewElement(elementToPrepend);
+        });
+
+    </script>
+</body>
+</html>

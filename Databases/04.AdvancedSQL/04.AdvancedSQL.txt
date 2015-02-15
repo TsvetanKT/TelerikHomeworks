@@ -1,0 +1,383 @@
+	>> Advanced SQL Homework <<
+
+01. Write a SQL query to find the names and salaries of the employees that take the minimal salary in the company.
+	Use a nested SELECT statement.
+
+SELECT FirstName, LastName, Salary
+FROM Employees
+WHERE Salary = 
+  (SELECT MIN(Salary) FROM Employees)
+
+
+02. Write a SQL query to find the names and salaries of the employees that have a salary that is up to 10% higher
+	than the minimal salary for the company.
+
+SELECT FirstName, LastName, Salary
+FROM Employees
+WHERE Salary BETWEEN
+  (SELECT MIN(Salary) FROM Employees) AND
+  (SELECT (MIN(Salary)+ MIN(Salary)*0.1) FROM Employees)
+
+
+03. Write a SQL query to find the full name, salary and department of the employees that take the minimal salary
+	in their department. Use a nested SELECT statement
+
+SELECT FirstName + ' ' + LastName as [Full Name], e.DepartmentID, d.Name, Salary
+FROM Employees e
+JOIN Departments d
+	ON e.DepartmentID = d.DepartmentID
+WHERE Salary = 
+  (SELECT MAX(Salary) FROM Employees 
+   WHERE DepartmentID = e.DepartmentID)
+ORDER BY e.DepartmentID
+
+
+04. Write a SQL query to find the average salary in the department #1.
+
+SELECT AVG(Salary) AS [Avarage salary in departament 1]
+FROM Employees
+WHERE DepartmentID = 1 
+
+
+05. Write a SQL query to find the average salary  in the "Sales" department.
+
+SELECT AVG(e.Salary) AS [Avarage salary in departament Sales]
+FROM Employees e 
+JOIN Departments d
+	ON e.DepartmentID = d.DepartmentID
+WHERE d.Name = 'Sales'
+
+
+06. Write a SQL query to find the number of employees in the "Sales" department.
+
+SELECT COUNT(EmployeeID)
+FROM Employees e 
+JOIN Departments d
+	ON e.DepartmentID = d.DepartmentID
+WHERE d.Name = 'Sales'
+
+
+07. Write a SQL query to find the number of all employees that have manager.
+
+SELECT COUNT(ManagerID) AS [Employees that have manager]
+FROM Employees
+
+
+
+08. Write a SQL query to find the number of all employees that have no manager.
+
+SELECT COUNT(*) AS [Employees that have NO manager]
+FROM Employees
+WHERE ManagerID IS NULL
+
+
+09. Write a SQL query to find all departments and the average salary for each of them.
+
+SELECT e.DepartmentID, d.Name, AVG(Salary) as [Average salary]
+FROM Employees e
+JOIN Departments d 
+	ON e.DepartmentID = d.DepartmentID
+GROUP BY e.DepartmentID, d.Name
+
+
+10. Write a SQL query to find the count of all employees in each department and for each town.
+	-- I have separated this task into two cuz combined seems strange.
+
+
+-- Count of all employees in each department
+SELECT e.DepartmentID, d.Name, COUNT(e.EmployeeID) as [Employees]
+FROM Employees e
+JOIN Departments d 
+	ON e.DepartmentID = d.DepartmentID
+GROUP BY e.DepartmentID, d.Name
+
+
+-- Count of all employees in each Town
+SELECT t.Name as [Town], COUNT(e.EmployeeID) as [Employees]
+FROM Employees e
+JOIN Addresses a
+	ON e.AddressID = a.AddressID
+JOIN Towns t
+	ON a.TownID = t.TownID
+GROUP BY t.Name
+
+
+-- Both in the same time
+SELECT t.Name AS [Town], d.Name AS [Departament], COUNT(e.EmployeeID) as [Employees]
+FROM Departments d
+JOIN Employees e
+	ON e.DepartmentID = d.DepartmentID
+JOIN Addresses a
+	ON e.AddressID = a.AddressID
+JOIN Towns t
+	ON t.TownID = a.TownID
+GROUP BY d.Name, t.Name
+
+
+11. Write a SQL query to find all managers that have exactly 5 employees. Display their first name
+	and last name.
+
+SELECT m.FirstName, m.LastName, COUNT(e.EmployeeId) AS [Number of employees]
+FROM Employees m
+JOIN Employees e
+	ON m.EmployeeID = e.ManagerID
+GROUP BY m.FirstName, m.LastName
+HAVING COUNT(e.EmployeeId) = 5
+
+
+12. Write a SQL query to find all employees along with their managers. For employees that do not
+	have manager display the value "(no manager)".
+
+SELECT e.FirstName + ' ' + e.LastName AS [Full Name],
+	ISNULL(m.FirstName + ' ' + m.LastName, '(no manager)') as [Manager Name]
+FROM Employees e
+LEFT OUTER JOIN Employees m
+	ON e.ManagerID = m.EmployeeID
+
+
+13. Write a SQL query to find the names of all employees whose last name is exactly 5 characters long.
+	Use the built-in LEN(str) function.
+
+SELECT FirstName, LastName
+FROM Employees
+WHERE LEN(LastName) = 5
+
+
+14. Write a SQL query to display the current date and time in the following format
+	"day.month.year hour:minutes:seconds:milliseconds". Search in  Google to find how to format dates in SQL Server.
+
+SELECT CONVERT(VARCHAR(10), GETDATE(), 104) + ' ' + CONVERT(VARCHAR(12), GETDATE(), 114) 
+	AS [Current date]
+
+15. Write a SQL statement to create a table Users. Users should have username, password, full name and last login time.
+	Choose appropriate data types for the table fields. Define a primary key column with a primary key constraint.
+	Define the primary key column as identity to facilitate inserting records. Define unique constraint to avoid repeating
+	usernames. Define a check constraint to ensure the password is at least 5 characters long.
+
+CREATE TABLE [dbo].[Users](
+        [Id] [int] IDENTITY(1,1) NOT NULL,
+        [Username] [varchar](50) UNIQUE NOT NULL,
+        [Password] [varchar](50) NOT NULL,
+        [FullName] [varchar](80) NOT NULL,
+        [LastLogin] [date] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED
+(
+	[Id] ASC
+)
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+
+ON [PRIMARY]
+GO
+ 
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [Pass_Length] CHECK  ((len([Password])>=(5)))
+GO
+ 
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [Pass_Length]
+GO
+
+
+16. Write a SQL statement to create a view that displays the users from the Users table that have been in the system today.
+	Test if the view works correctly.
+
+CREATE VIEW [dbo].[View_WasUserLoggedToday]
+AS
+SELECT Id, Username, Password, FullName, LastLogin
+FROM dbo.Users
+WHERE (CONVERT(VARCHAR(50), LastLogin, 110) = CONVERT(VARCHAR(50), GETDATE(), 110))
+
+
+17. Write a SQL statement to create a table Groups. Groups should have unique name (use unique constraint).
+	Define primary key and identity column.
+
+CREATE TABLE [dbo].[Groups]
+(
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) UNIQUE NOT NULL,
+	 CONSTRAINT [PK_Groups] PRIMARY KEY CLUSTERED
+(
+ [Id] ASC
+)
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) 
+ON [PRIMARY]
+
+
+18. Write a SQL statement to add a column GroupID to the table Users. Fill some data in this new column and
+	as well in the Groups table. Write a SQL statement to add a foreign key constraint between tables Users and Groups tables.
+
+ALTER TABLE Users
+ADD GtoupId int NOT NULL
+ 
+ALTER TABLE Users
+ADD CONSTRAINT fk_Users_Groups
+FOREIGN KEY (GroupId)
+REFERENCES Groups(Id)
+
+
+19. Write SQL statements to insert several records in the Users and Groups tables.
+
+INSERT INTO Users (Username, Password, FullName, LastLogin, GroupId)
+VALUES ('Joko', 'pass123', 'Joe Cocker', GETDATE(), 3)
+
+INSERT INTO Users (Username, Password, FullName, LastLogin, GroupId)
+VALUES ('Ceca', 'secret', 'Ceca Kokova', GETDATE(), 2)
+ 
+INSERT INTO Groups (Name)
+VALUES ('Workers')
+ 
+INSERT INTO Groups (Name)
+VALUES ('Gamers')
+
+
+20. Write SQL statements to update some of the records in the Users and Groups tables.
+
+UPDATE Users
+SET Password = 'password1'
+WHERE Id = 1
+ 
+UPDATE Users
+SET GroupId = 5
+WHERE Id = 2
+ 
+UPDATE Groups
+SET Name = 'Butchers'
+WHERE Id = 1
+ 
+UPDATE Groups
+SET Name = 'Musicants'
+WHERE Id = 2
+
+
+21. Write SQL statements to delete some of the records from the Users and Groups tables.
+
+DELETE FROM Users
+WHERE Id = 2
+ 
+
+DELETE FROM Groups
+WHERE Name = 'Musicants'
+ 
+DELETE FROM Groups
+WHERE Id = 101
+
+
+22. Write SQL statements to insert in the Users table the names of all employees from the Employees table.
+	Combine the first and last names as a full name.For username use the first letter of the
+	first name + the last name (in lowercase). Use the same for the password, and NULL for last login time.
+
+INSERT INTO Users
+SELECT LOWER(LEFT(e.FirstName, 1) + '.' + e.LastName) AS [Username],
+	LOWER(LEFT(e.FirstName, 1) + '.' + e.LastName + '-secret') AS [Password],
+	e.FirstName + ' ' + e.LastName AS [FullName],
+	GETDATE() AS LastLogin,
+	10 AS GroupId
+FROM Employees e
+
+
+23. Write a SQL statement that changes the password to NULL for all users that have not been in the system since 10.03.2010.
+
+UPDATE Users
+SET LastLogin = NULL
+WHERE LastLogin <= '10.03.2010'
+
+
+24. Write a SQL statement that deletes all users without passwords (NULL password).
+
+DELETE FROM Users
+WHERE Password IS NULL
+
+
+25. Write a SQL query to display the average employee salary by department and job title.
+
+SELECT AVG(e.Salary) AS [Avarage salary], d.Name, e.JobTitle AS [Job Title]
+FROM Employees e
+	JOIN Departments d
+	ON e.DepartmentID = d.DepartmentID
+GROUP BY e.JobTitle, d.Name
+
+
+26. Write a SQL query to display the minimal employee salary by department and job title along with the name of some
+	of the employees that take it.
+
+SELECT MIN(e.Salary) AS [Min salary], d.Name, e.JobTitle, MIN(e.FirstName + ' ' + e.LastName) AS [Full Name]
+FROM Employees e
+	JOIN Departments d
+	ON e.DepartmentID = d.DepartmentID
+GROUP BY e.JobTitle, d.Name
+
+
+27. Write a SQL query to display the town where maximal number of employees work.
+
+SELECT TOP 1 t.Name, COUNT(*) AS [Employees]
+FROM Employees e
+	JOIN Addresses a 
+	ON a.AddressID = e.AddressID
+	JOIN Towns t 
+	ON t.TownID = a.TownID
+GROUP BY t.Name
+ORDER BY COUNT(*) DESC
+
+
+28. Write a SQL query to display the number of managers from each town.
+
+SELECT t.Name as [Town], COUNT(e.ManagerID) AS [Number of managers]
+FROM Employees e
+	JOIN Addresses a 
+		ON e.AddressID = a.AddressID
+	JOIN Towns t 
+		ON t.TownID = a.TownID
+WHERE e.EmployeeID in (SELECT DISTINCT ManagerID FROM Employees)
+GROUP BY t.Name
+
+
+29. Write a SQL to create table WorkHours to store work reports for each employee (employee id, date, task, hours, comments).
+	Don't forget to define  identity, primary key and appropriate foreign key. Issue few SQL statements to insert, update and
+	delete of some data in the table. Define a table WorkHoursLogs to track all changes in the WorkHours table
+	with triggers. For each change keep the old record data, the new record data and the command (insert / update / delete).
+
+	--TODO
+
+30. Start a database transaction, delete all employees from the 'Sales' department along with all dependent records
+	from the pother tables. At the end rollback the transaction.
+
+BEGIN TRAN
+	DELETE FROM Employees
+	SELECT d.Name
+	FROM Employees e JOIN Departments d
+	ON e.DepartmentID = d.DepartmentID
+	WHERE d.Name = 'Sales'
+	GROUP BY d.Name
+ROLLBACK TRAN
+
+
+31. Start a database transaction and drop the table EmployeesProjects. Now how you could restore back the lost table data?
+
+BEGIN TRAN
+	DROP TABLE EmployeesProjects
+ROLLBACK TRAN
+
+
+32. Find how to use temporary tables in SQL Server. Using temporary tables backup all records from EmployeesProjects
+	and restore them back after dropping and re-creating the table.
+
+CREATE TABLE #TemporaryTable(
+	EmployeeID int NOT NULL,
+	ProjectID int NOT NULL
+)
+INSERT INTO #TemporaryTable
+SELECT EmployeeID, ProjectID
+FROM EmployeesProjects
+DROP TABLE EmployeesProjects
+CREATE TABLE EmployeesProjects(
+	EmployeeID int NOT NULL,
+	ProjectID int NOT NULL,
+	CONSTRAINT PK_EmployeesProjects PRIMARY KEY(EmployeeID, ProjectID),
+	CONSTRAINT FK_EP_Employee FOREIGN KEY(EmployeeID) REFERENCES Employees(EmployeeID),
+	CONSTRAINT FK_EP_Project FOREIGN KEY(ProjectID) REFERENCES Projects(ProjectID)
+)
+INSERT INTO EmployeesProjects
+SELECT EmployeeID, ProjectID
+FROM #TemporaryTable

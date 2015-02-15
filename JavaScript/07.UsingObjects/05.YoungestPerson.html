@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>05.Exercise</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <p>05.Write a function that finds the youngest person in a given array of persons and prints his/hers full name</p>
+    <p>Each person have properties firstname, lastname and age, as shown:</p>
+    <p>var persons = [<br/>{ firstname : 'Gosho', lastname: 'Petrov', age: 32 },<br/>{ firstname : 'Bay', lastname: 'Ivan', age: 81},… ];</p>
+    <hr/>
+    <p>Reload the page to generate another result.</p>      
+    <div id="js-console"></div>    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var persons = [
+         { firstname: "Nikolai", lastname: "Petrov", age: Math.floor((Math.random() * 98)) + 1}, 
+         { firstname: "Ceca", lastname: "Petrova", age: Math.floor((Math.random() * 98)) + 1},
+         { firstname: "Joko", lastname: "Vasilev", age: Math.floor((Math.random() * 98)) + 1},
+         { firstname: "Petrana", lastname: "Anastasova", age: Math.floor((Math.random() * 98)) + 1}];
+
+        findYoungest(persons);
+
+        function findYoungest(persons) {
+            var indexYoungest = 0;
+            var ageYongest = persons[0].age;
+
+            for (var i = 1; i < persons.length; i+=1) {
+                if (persons[i].age < ageYongest) {
+                    ageYongest = persons[i].age;
+                    indexYoungest = i;
+                }
+            }
+
+            jsConsole.writeLine("The youngest person is: " + persons[indexYoungest].firstname + " " +
+            persons[indexYoungest].lastname + " Age: " + persons[indexYoungest].age)
+
+            jsConsole.writeLine();
+            jsConsole.writeLine("The others are:");
+
+            for (var j = 1; j < persons.length; j+=1) {
+                jsConsole.writeLine(persons[j].firstname + " " + persons[j].lastname + " Age: " + persons[j].age);
+            }
+
+        }
+    </script>
+</body>
+</html>

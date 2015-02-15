@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>03.Exercise</title>
+    <link href='styles/js-console.css' rel='stylesheet' />
+</head>
+
+<body>
+    <p>03.Write a script that finds the maximal sequence of equal elements in an array.</p>
+    <p>Example: {2, 1, 1, 2, 3, 3, 2, 2, 2, 1} -> {2, 2, 2}.</p>
+    <br />
+    <p>Reload the page to generate another array.</p>
+    <div id='js-console'></div>
+    <script src='scripts/js-console.js'></script>
+    <script>
+
+        var arrayInt = new Array(22);
+        for (var i = 0; i < 22; i += 1) {
+            arrayInt[i] = Math.floor((Math.random() * 9));
+        };
+
+        jsConsole.writeLine('arr = ' + arrayInt.join(', '));
+
+        var currentCount = 1;
+        var finalCount = 1;
+        var currentElement = 0;
+        var finalElement = 0;
+
+        for (var i = 0; i < arrayInt.length - 1;) {
+            currentCount = 1;
+            var currentIndex = i;
+
+            while (arrayInt[currentIndex] == arrayInt[currentIndex + 1]) {
+                currentCount++;
+                currentIndex++;
+                currentElement = arrayInt[i];
+            }
+
+            i += currentCount;
+            if (currentCount > finalCount) {
+                finalCount = currentCount;
+                finalElement = currentElement;
+            }
+        }
+
+        jsConsole.writeLine();
+        jsConsole.write('Maximal sequence: ');
+
+        if (finalCount == 1) {
+            jsConsole.writeLine('No sequence of equal elements in the array.');
+        }
+
+        else {
+            for (var i = 0; i < finalCount; i++) {
+                if (i == 0) {
+                    jsConsole.write('{' + finalElement + ',');
+                }
+
+                else if (i < finalCount - 1) {
+                    jsConsole.write(finalElement + ',');
+                }
+
+                else {
+                    jsConsole.write(finalElement + '}');
+                }
+
+            }
+        }
+    </script>
+</body>
+
+</html>
