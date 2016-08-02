@@ -1,0 +1,1889 @@
+/// C#1
+
+-deseti4na to4ka
+
+using System.Threading;
+using System.Globalization;
+
+Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+...
+
+-data types
+
+Integer types are:
+	sbyte (-128 to 127): signed 8-bit
+	byte (0 to 255): unsigned 8-bit
+	short (-32,768 to 32,767): signed 16-bit
+	ushort (0 to 65,535): unsigned 16-bit
+	int (-2,147,483,648 to 2,147,483,647): signed 32-bit
+	uint (0 to 4,294,967,295): unsigned 32-bit
+	long (-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807): signed 64-bit
+	ulong (0 to 18,446,744,073,709,551,615): unsigned 64-bit
+
+Floating-point types are:
+	float (±1.5 * 10^-45 to ±3.4 * 10^38): 32-bits, precision of 7 digits
+	double (±5.0 * 10^-324 to ±1.7 * 10^308): 64-bits, precision of 15-16 digits
+	decimal (±1,0 * 10^-28 to ±7,9 * 10^28): 128-bits, precision of 28-29 digits
+
+The default value of  types:
+	0.0F - float
+	0.0D - double
+	0.0M - decimal
+	0u - ulong or uint - 0UL, 123UI
+
+The character data type:
+	Has a '\0' default value
+	Takes 16 bits of memory (from U+0000 to U+FFFF)
+	\uXXXX for denoting any other Unicode symbol
+	char symbol = '\u006F';  
+
+The string data type:
+	Has a default value null (no value)
+	\' = \      \" = "    \\ = \  \n = new line
+
+	// Here is a string literal using escape sequences
+	string quotation = "\"Hello, Jude\", he said.";
+	string path = "C:\\WINNT\\Darts\\Darts.exe";
+			
+	// Here is an example of the usage of @
+	quotation = @"""Hello, Jimmy!"", she answered.";
+	path = @"C:\WINNT\Darts\Darts.exe";
+
+	string str = @"some
+			text";
+
+	var joined = string.Join(", ", beers); // beers - colection
+
+
+
+using System.Numerics;   
+BigIntriger
+
+Ints as hex:
+	0xA8F1 -- begins with 0x or 0X
+
+
+if x = null, set y to -1. 
+int y = x ?? -1;
+
+...
+
+
+- exit
+
+Environment.Exit and Application.Exit
+Environment.Exit(0) is cleaner.??
+
+...
+
+
+
+//printva 40 4erti
+new string ('-',40); 
+
+
+//format na koda = izglejda po 4etimo
+ctrl + k + f 
+         + d
+
+
+//vuvejdane int inputNumber, a koda go konvertira v string arrey bits - 6 = 00000...00110
+char[] numberBinaryDigits = Convert.ToString(inputNumber, 2).PadLeft(32, '0').ToCharArray();
+
+
+//int error 
+	checked
+	{
+	  // This will cause OverflowException
+	  int bigNum = Int32.MaxValue;
+	  bigSum = bigNum * 2;
+	}
+
+
+//remove null-s
+	int? x = null;
+	int y = x ?? -1; 
+
+
+//format strings
+	double some = 1.234;
+	Console.WriteLine("{0:0.000000}", some); // 1.234000
+
+	float pi = 3.14159206;
+	Console.WriteLine("{0:F2}", pi); // 3,14
+
+
+//try parse
+	string str = Console.ReadLine();
+	int number;
+	if (int.TryParse(str, out number))
+	{
+	   Console.WriteLine("Valid number: {0}", number);
+	}
+	else
+	{
+	   Console.WriteLine("Invalid number: {0}", str);
+	}
+
+
+// Switch
+	switch (day)
+	{
+		case 1: 
+			Console.WriteLine("Monday"); 
+			break;
+		default: 
+			Console.WriteLine("Error!"); 
+			break;
+	}
+
+
+// For loop
+	for (int i = 1; i <= n; i += 2)
+	{
+	   if (i % 7 == 0)
+	   {
+	      continue;
+	   }
+
+	   if (i % 50 == 0)
+	   {
+			break;
+	   }
+
+	   sum += i;
+	}
+
+
+// Arrays	
+	var myIntArray = new int[5];
+	int[] myIntArray = {1, 2, 3, 4, 5};
+
+	int[,] intMatrix = new int[3, 4];
+
+
+	string[] daysOfWeek =
+	{
+	    "Monday",
+	    "Tuesday"
+	};
+
+	int[,] matrix = 
+	{
+	    {1, 2, 3, 4}, // row 0 values
+	    {5, 6, 7, 8}, // row 1 values
+	};
+
+	matrix.GetLength(0)// get rows
+
+
+// Initialize the reversed array
+	for (int index = 0; index < length; index++)
+	{
+	    reversed[length-index-1] = array[index];
+	}
+
+// Sort arrays
+	public class StudentAgeComparer : IComparer<Student>
+	{
+	    public int Compare(Student firstStudent, Student secondStudent)
+	    {
+	       return firstStudent.Age.CompareTo(secondStudent.Age);
+	    }
+	}
+
+	…
+	Array.Sort(students, new StudentAgeComparer());
+	…
+	Array.Sort(students, (x, y) => x.Name.CompareTo(y.Name));
+
+/// C# Part 2
+
+//string split
+	char[] delimiters = new char[] { '\r', '\n' };
+	string[] parts = value.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+
+	string [] input = Console.ReadLine().Split(new char[] {'',','}, StringSplitOptions.RemoveEmptyEntryes );
+
+// konvert  char v cifra lesno
+	int cifra = ch -'0'; 
+
+// Method with params 
+	static long CalcSum(params int[] elements)
+	{
+	   long sum = 0;
+	   foreach (int element in elements)
+	      sum += element;
+	   return sum;
+	}
+
+// Exception
+	try
+	{
+	    // Some exception is thrown here
+    }
+	catch (<exception type>)
+	{    
+		// Exception is handled here
+	}
+	catch (<exception type>)
+	{    
+		// More generig exception
+	}
+	finally
+	{
+	    // The code here is always executed, no
+	    // matter if an exception has occurred or not   
+    }
+
+// Search in strings
+
+IndexOf(string str) //First occurrence
+IndexOf(string str, int startIndex) // First occurrence starting at given position
+LastIndexOf(string)
+
+filename.Substring(8, 8);
+s.Trim(' ', ',' ,'!', '\n','\t');
+
+number.ToString("D5"); // 42 - 00042
+number.ToString("X"); // 2A
+number.ToString("C"); // 42,00 лв
+d.ToString("P2"); // 0.375 - 37,50 %
+
+String.Format("{0,10:F5}", d); // 0.375 - "   0,37500"
+Now is {0:d.MM.yyyy HH:mm:ss}", now); // Now is 31.11.2009 11:30:32
+
+
+/// OOP
+
+// Class
+	public class Cat : Animal 
+	{
+		private string name;                   // Field
+
+		public Cat() : this("Unnamed") 		   // Reuse the constructor
+		{
+		}
+	   
+		public Cat(string name)                // Constructor
+		{
+		  this.name = Name;
+		}
+
+		public string Name                      // Property
+		{ 
+			get { return this.name; }
+			set 
+			{ 
+				this.name = value; 
+			}
+		}
+
+		public string City { get; set; }
+		             
+		public void SayMiau()                   // Method
+		{
+			Console.WriteLine("Miauuuuuuu!");
+		}
+	} 
+
+// Access
+	public – accessible from any class
+	protected – accessible from the class itself and all its descendent classes
+	private – accessible from the class itself only
+	internal (default) – accessible from the current assembly, i.e. the current VS project
+
+	protected internal – access is limited to the current assembly or types derived from the containing class
+
+// Enum
+	public enum CoffeeSize
+	{
+	  Small = 100, 
+	  Normal = 150, 
+	  Double = 300
+	}
+
+// Indexers Generics Atributes ([Flags])
+in 02.Defining-Classes-Part-II-Static-Members-Generics
+
+// Overloading Operators
+	public static Matrix operator *(Matrix m1, Matrix m2)
+	{
+	    return new m1.Multiply(m2);
+	}
+
+//- 03.Extension-Methods-Delegates-Lambda-LINQ
+
+// Extend string with new method
+	public static class Extensions
+	{
+	  public static int WordCount(this string str)
+	  {
+	    return str.Split(new char[] { ' ', '.', '?' },
+	    StringSplitOptions.RemoveEmptyEntries).Length;
+	  }
+	} 
+	...
+	static void Main()
+	{
+	  string s = "Hello Extension Methods";
+	  int i = s.WordCount();
+	  Console.WriteLine(i);
+	}
+
+// Anonymous type
+	var p = new { X = 3, Y = 5 };
+
+// Multicast Delegates - na vsi metodi vutre
+	se podavat dannite, a izlizat samo return dannite na posledniq
+
+// Delegate
+	Action<string> cw = Console.WriteLine; // za void
+	Func<string, int> = int.Parse; // vru6ta posledniq parametur - int
+
+// Eventi ??
+	video 2015 ~ 1.10.00
+
+// LINQ
+video 2015 ~ 3.02.00
+	from – specifies data source and range variable
+	where – filters source elements
+	select – specifies the type and shape that the elements in the returned sequence
+	group – groups query results according to a specified key value
+	orderby – sorts query results in ascending or descending order
+
+	Where()  x => bool // tursim ne6to po uslovie
+	First()/FirstOrDefault()  x => x.mark > 2 // firs dava error ako nqma, FirstOrDefault - null
+	Last()/LastOrDefault()  
+	Select()/Cast()  x => x.Marks  // .Cast<obj>
+	OrderBy()/ThenBy()/OrderByDescending()   x => x.LastName
+	Any()  x => x.Age > 16 // bool
+	All()
+	ToArray()/ToList()/AsEnumerable()
+	Reverse()
+	Average()  x => x.Mark
+	Count()   bool
+	Max()
+	Sum()
+	GrupBy() x => x.Mark // suzdava kolekciq ot kolekcii - vsqka razli4na Mark ima sobstvena kolekc
+
+	var querySmallNums =
+	    from num in numbers
+	    where num < 5
+	    select num;
+
+	var townPairs =
+	  from t1 in towns
+	    from t2 in towns
+	    select new { T1 = t1, T2 = t2 };
+
+	int[] numbers = { 5, 4, ...
+
+	var querySmallNums =
+	    from num in numbers
+	    where num < 5
+	    select num;    // all num < 5
+
+	from fruit in fruits orderby fruit select fruit; //  Sort in ascending sort a,b,c,..
+
+	var subset = from g in games 
+	             where g.Length > 6
+	             orderby g
+	             select g; //  All with lenght >6 and sorted a ,b ,c
+	                
+	var titles =
+	  from b in books
+	  where b.Title.Contains("Action")
+	  select b.Title;
+
+	var count =
+	  (from c in "Non-letter…"
+	  where !Char.IsLetter(c)
+	  select c).Count(); // All non characters (int's) in string
+
+	var highTemp =
+	  (from p in temperatures
+	   select p).Max();
+
+   	var customerPhoness = context.Customers
+                          .Select(c => c.Phone)
+                          .Where(c => c.City == "London")
+                          .ToList();
+
+  	var customers = 
+	    from c in context.Customers
+	    where c.City == "London"
+	    select c;
+
+    var empls = db
+    	.Employees
+    	.Where(e => e.Department.Name == "Sales")
+    	.Select( e => new
+    	{
+    		Id = e.EmployeeID,
+    		Name = e.FirstNAme + " " + e.LastName,
+    		DepartmentNAme = e.Department.NAme
+    	})
+    	.GroupBy(e => e.DepratmentName)
+    	.ToList();
+
+	var filteredStudents = 
+		listOfStudents
+			.Where(st => st.LastName.StartsWith("G"))
+			.OrderBy(st => st.mark)
+			.Select(st => new { LastName = st.LastName })
+			.ToList();
+
+	var cities = colection...
+	var certesianExtension = 
+		cities
+			.SelectMany(c1 => cities.Select(c2 => c1 + c2))
+			.ToList(); // Kombinira vsi elementi vsqko s vsqko, ne kolekcii ot kolekcii
+
+
+/// 04.Object-Oriented-Programming-Principles-Part-I.pptx
+	Inheritance
+	Inherit members from parent class
+	Abstraction
+	Define and execute abstract actions
+	Encapsulation
+	Hide the internals of a class
+	Polymorphism
+	Access a class through its parent interface
+
+	The methods Equals(), GetHashCode() should be defined at the same time
+	The same applies for the operators == and !=
+	You can override Equals() and use its implementation for == and !=
+
+
+// Interface
+	public interface IFigure 
+	{ 
+		void Draw(); 
+	}
+
+
+// Invoke base construct
+	public Circle (int x, int y) : base(x)
+	{ … }
+
+
+// Virtual methods - for override
+	public override string Method ()
+	{
+		return base.Method() + "Novoto";
+	}
+
+	public override bool Equals(object param)
+	  {
+	    // If the cast is invalid, the result will be null
+	    Student student = param as Student;
+	    // Check if we have valid not null Student object
+	    if (student == null)
+	      return false;
+	    // Compare the reference type member fields
+	    if (! Object.Equals(this.Name, student.Name))
+	      return false;
+	    // Compare the value type member fields
+	    if (this.Age != student.Age)
+	      return false;
+	    return true;
+	  }
+
+	public static bool operator == (Student student1,
+	                                  Student student2)
+	{
+	   return Student.Equals(student1, student2);
+	}
+	public static bool operator !=(Student student1,
+						  Student student2)
+	{
+	   return !(Student.Equals(student1, student2));
+	}
+	public override int GetHashCode()
+	{
+	   return Name.GetHashCode() ^ Age.GetHashCode();
+	}
+
+
+// Abstract classes - empty and not
+	abstract class MovableShape : IShape, IMovable
+	{
+	    private int x, y;
+	    public void Move(int deltaX, int deltaY)
+	    {
+	        this.x += deltaX;
+	        this.y += deltaY;
+	    }
+	    public void SetPosition(int x, int y)
+	    {
+	        this.x = x;
+	        this.y = y;
+	    }
+	    public abstract int CalculateSurface();  // EMPTY
+	}
+
+
+// UML Class diagram
+
+// Operator as
+	The as operator
+	Casts a reference type to another reference type
+	Returns null value if it fails
+	E.g. if the types are incompatible
+
+
+/// 05.Object-Oriented-Programming-Principles-Part-II.pptx
+
+// Exception
+	throw new InvalidCalculationException(
+  		"Cannot calculate the size of the specified object");
+
+	// xx?? more exception samples
+
+/// 06.Common-Type-System
+	1:39 kak pri kopirane na klas referentnite tipove da se klonirat
+	1.58.21 - su6toto
+
+
+// dali 2 obekta so4at kum 1 instanciq v pametta
+	var areTheSame = object.ReferenceEquals(cat, anotherCat);
+
+// Cast () i operator as
+	var catCastedToDog = (Dog)cat; // Error
+	var catAsDog = cat as Dog; // null
+
+// Clonirane - Deep, Shallow -> nasledqvame interface ICloneable
+	Clone() vru6ta obekt - trqbva da si go kastvame ako go polzvame
+
+// MemberwiseClone()
+	Klonira samo stoinostnite tipove, referentnite si ostavat pointeri kum starite
+
+// IComparable<T> - kak da se sravnqvat obektite - vajno za SortedSet
+	CompareTo(T) - metod ot interfeisa, returns int
+		<0 - T > this
+		=0 - T = this
+
+		public int CompareTo(Cat otherCat)
+		{
+			return this.Age.CompareTo(otherCat.Age)
+		}
+
+// IEnumerable<T> iska - IEnumerator<T> (specialen klas otdelno da inplementirame)
+	Video 2015 - 1.58.20
+		public interface IEnumerator<T> : IEnumerator
+		{
+			bool MoveNext();
+			void Reset();
+			T Current { get; }
+		}
+
+		public interface IEnumerator
+		{
+			bool MoveNext();
+			void Reset();
+			object Current { get; }
+		}
+
+	2.10.30 - bez Enumerator, s yield return;
+		public IEnumerator<int> GetEnumerator()
+		{
+			for (int i=100; i<200; i++)
+			{
+				yield return i;
+			}
+		}
+
+// Primitivni danni se pazat v stack-a (512 KB size?), referentnite - v dinamyc memmory - Ram
+
+// Promqna na primitivni tipove v void metod (vse edno e referenten)
+	public static void ChandeNumber(ref int num)
+	{
+		num += 100;
+	}
+	...
+	int num = 5;
+	ChandeNumber(ref num); // 105
+
+
+
+/// KPK
+
+// TryParse
+int input;
+	bool validInput = 
+		int.TryParse(Console.ReadLine(), out input);
+	if (validInput)
+	{...
+
+// Run time constant
+	public static readonly string ConfigFile = "app.xml";
+
+// if (!IsValid || !IsVisible) === if (!(IsValid && IsVisible))
+
+
+// Polymorphism
+	The ability to handle the objects of a specific class as instances of its parent class
+
+// Encapsulation 
+	Classes should hide their implementation details
+
+
+// Unit test
+	Видео - 22 юли 2015 - Дончо - 0.22.00
+
+	Nov proekt - C# - Test - Unit Test project
+	Runing - Test - Al Tests - Run
+	Rezultati (ako ne se pokajat) - Test - Windows - Test Explorer
+
+	[TestMethod]
+	public void TestDeposit()
+	{
+	  BankAccount account = new BankAccount();
+	  account.Deposit(125.0);
+	  account.Deposit(25.0);
+	  Assert.AreEqual(150.0, account.Balance, 
+	    "Balance is wrong.");
+	}
+
+// Debugging
+	Debugvane na 4ujd software
+	Visual Studio - Debug menu - Attach to Process 
+
+	F5 - debug do breakpoint
+	F10 - next step
+	F11 - vlizame v method
+
+	Breackpoint - dqsno kop4e - conditioni, filtri...
+
+	Data view - Видео - 30 юли 2015 - Ники - 0.37.40
+
+// t4 Text template for C#
+	Generira code
+	Pi6em t4 pri proektite - Text template
+	example - Инструменти за разработка - Част 2 [HD, 720p].mp4 2015 0.07.00
+	0.12.00 - primer za durpane ot baza danni s generiran code
+
+// Logging in C#
+	Log4Net
+	(gornoto video) 0.22.15
+		Issue traking na github - 0.30.00
+
+
+// SOLID и други принципи [HD, 720p]
+	Different logic in different classes - 0.46.00
+
+	Inversion of Control container - 1.49.00 - Ninject (2.06.00)- v konstrukt ot kakvo imame nujda
+	Poor man IoC - 2.01.00 - imame i dopulnitelen prazen Contruktor koito instancira defoltni stoinosti
+
+	S - Single Responsibility Principle 
+	every object should have a single responsibility, and that responsibility should be entirely encapsulated by the class.
+		- separate clasess
+
+	O - Open/closed principle
+    software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
+    	-Rely on abstractions
+
+    L = Liskov Substitution Principle 
+    Subtypes must be substitutable for their base types.
+    	- child must no t Remove base class behavior
+
+    I - Interface Segregation Principle 
+    Clients should not be forced to depend on methods they do not use.
+    	- Prefer small, cohesive interfaces
+
+	D - Dependency Inversion
+	depend on abstractions, new is bad
+		- Inversion of Control container - ninject
+
+
+
+// Patterns - Creational
+	List of Creational Patterns:
+		Singleton
+		Simple Factory
+		Factory Method
+		Abstract Factory - Encapsulates object creation logic, hide complex object creation
+		Builder - Separation of logic and data when object is constructed
+		Prototype - Create new objects by copying prototype, Instead of using "new" 
+		Fluent Interface
+		Object Pool - Avoid expensive acquisition and release of resources by recycling unused objects
+		Lazy initialization - Tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed
+
+
+	List of Structural Patterns
+		Façade - simplified interface to a larger body of code, in  API 
+		Composite - different objects and we want to treat them the same way, using inheretence of interface
+		Flyweight - Use sharing to support large numbers of fine-grained objects efficiently, Minimizes memory use 
+		Proxy - An object representing another object, wrapper 
+		Decorator - Add functionality to existing objects at run-time
+		Adapter - Converts the given class' interface into another class requested by the client when incompatible interfaces
+		Bridge - From: Abstraction -> Implementation To: Abstraction ->Abstraction ->Implementation
+
+
+
+	List of Behavioral Patterns
+		Chain of Responsibility - Allows you to pass a request to from an object to the next until the request is fulfilled
+		Iterator - Access to the elements of a complex object without revealing its actual presentation - IEnumerator 
+		Template Method - Defines the base of an algorithm in a method, leaving some implementation to its subclasses
+		Strategy - Encapsulate a family of related algorithms
+		Command - object that encapsulates all the information needed to call a method at a later time - action (request) as an object
+		Observer - Define a one-to-many dependency between different objects - events
+		Mediator - Simplifies communication between classes
+		Memento - Capture and restore an object's internal state - undo
+		State - Alter an object's behavior when its state changes
+		Interpreter - A way to include language (formal grammar) elements in a program
+		Visitor - Represent an operation to be performed on the elements of an object structure ???
+
+
+	//Lazy loading
+	private Singleton(){};
+	if (instance == null)
+	{
+		instance = new Singleton();
+	}
+
+	//Creational Patterns (Шаблони за създаване) (Ники) 2015 - 0.46.00
+
+// do 0.53 - lo6 na4in e s gledane na videotata pak
+
+
+
+
+/// Структури от данни и алгоритми 2015"
+
+
+    Linear structures
+        Lists: fixed size and variable size
+        Stacks: LIFO (Last In First Out) structure
+        Queues: FIFO (First In First Out) structure
+    Trees and tree-like structures
+        Binary, ordered search trees, balanced, B-trees, etc.
+    Dictionaries (maps)
+        Contain pairs (key, value)
+        Hash tables: use hash functions to search/insert
+    Sets and bags
+        Set – collection of unique elements
+        Bag – collection of non-unique elements
+    Ordered sets, bags and dictionaries
+    Priority queues / heaps
+    Special tree structures
+        Suffix tree, interval tree, index tree, trie
+    Graphs
+        Directed / undirected
+        Weighted / un-weighted
+        Connected / non-connected, …
+
+
+
+	Complexity 	Notation 	Description
+		constant 	O(1) 	Constant number of operations, not depending on the input data size, e.g. n = 1 000 000 → 1-2 operations
+
+		logarithmic 	O(log n) 	Number of operations propor-tional of log2(n) where n is the size of the input data, e.g. n = 1 000 000 000 → 30 operations
+
+		linear 	O(n) 	Number of operations proportional to the input data size, e.g. n = 10 000 → 5 000 operations
+
+		quadratic 	O(n2) 	Number of operations proportional to the square of the size of the input data, e.g. n = 500 → 250 000 operations
+
+		cubic 	O(n3) 	Number of operations propor-tional to the cube of the size of the input data, e.g. n = 200 → 8 000 000 operations
+
+		exponential 	O(2n), O(kn), O(n!) 	Exponential number of operations, fast growing, e.g. n = 20 → 1 048 576 operations
+
+
+// Array
+	Use when fixed number of elements should be processed by index
+    Provides direct access by index
+    Has fixed capacity
+    Insertion, deletion and resizing are slow operations
+
+// List<T>
+	Use when elements should be added and processed by index
+
+// LinkedList<T>
+    Use when elements should be added at the both sides of the list
+    Otherwise use resizable array list (List<T>)
+    AddFirst(T), AddLast(T), AddBefore(T), AddAfter(T), RemoveFirst(T), RemoveLast(T), Count
+
+// Stack<T>
+    Use to implement LIFO (last-in-first-out) behavior
+    List<T> could also work well
+
+// Queue<T>
+    Use to implement FIFO (first-in-first-out) behavior
+    LinkedList<T> could also work well
+
+// Dictionary<K,T>
+    Use when key-value pairs should be added fast and searched fast by key
+    Elements in a hash table have no particular order
+
+// SortedDictionary<K,T> - Balanced search tree based dictionary
+    Use when key-value pairs should be added fast, searched fast by key and enumerated sorted by key
+
+// HashSet<T>
+    Use to keep a group of unique values, to add and check belonging to the set fast
+    Elements are in no particular order
+
+// SortedSet<T> - Search tree based set
+    Use to keep a group of ordered unique values
+
+
+// List sort
+	list.Sort();
+	list.Sort((d1, d2) => -d1.Year.CompareTo(d2.Year));
+	list.OrderBy(date => date.Month)));
+
+// List Interfaces in .NET
+    IEnumerable, IEnumerable<T>
+        GetEnumerator() → Current, MoveNext()
+    ICollection, ICollection<T>
+        Inherits from IEnumerable<T>
+        Count, Add(…), Remove(…), Contains(…)
+    IList, IList<T>
+        Inherits from ICollection<T>
+        Item / indexer [], Insert(…), RemoveAt(…)
+
+
+// Trees
+
+// Depth-First Search (DFS)
+	first visits all descendants of given node recursively, finally visits the node itself
+
+	DFS(node)
+	{
+	for each child c of node
+		DFS(c);
+	print the current node;
+	}
+
+	// Or...
+	DFS(node)
+	{
+	  stack <- node
+	  while stack not empty
+	    v <- stack
+	    print v
+	    for each child c of v
+	      stack <- c
+	}
+
+
+// Breadth-First Search (BFS)
+	first visits the neighbor nodes, later their neighbors, etc.
+
+	BFS(node)
+	{
+	  queue <- node
+	  while queue not empty
+	    v <- queue
+	    print v
+	    for each child c of v
+	      queue <- c
+	}
+
+
+// HashSet<T>  , SortedSet<T> 
+	fast Add / Find / Delete O(1)
+	Bag - set s povtarq6ti se elementi
+
+// Dictionary<TKey,TValue> 
+	fast Add / Find / Delete
+	Object.Equals() – for comparing the keys
+	Object.GetHashCode() – for calculating the hash codes of the keys
+
+// SortedDictionary<TKey,TValue> 
+	fast Add / Find / Delete perform log2(n) 
+	need IComparable<T> for the keys
+
+	public struct Point : IComparable<Point>
+	{
+		public int X { get; set; }
+		public int Y { get; set; }
+
+		public override bool Equals(Object obj)
+		{
+			if (!(obj is Point) || (obj == null)) return false;
+			Point p = (Point)obj;
+			return (X == p.X) && (Y == p.Y);
+		}
+
+		public override int GetHashCode()
+		{
+			return (X << 16 | X >> 16) ^ Y;
+		}
+
+		public int CompareTo(Point otherPoint)
+		{
+			if (X != otherPoint.X)
+			{
+				return this.X.CompareTo(otherPoint.X);
+			}
+			else
+			{
+				return this.Y.CompareTo(otherPoint.Y);
+			}
+		}
+	}
+
+
+// Wintellect Power Collections
+	Advanced data colections
+	http://powercollections.codeplex.com
+	NuGet - powercollection
+
+    Bag<T>
+        A bag (multi-set) based on hash-table
+            Unordered collection (with duplicates)
+        Add / Find / Remove work in time O(1)
+        T should provide Equals() and GetHashCode()
+    OrderedBag<T>
+        A bag (multi-set) based on balanced search tree
+        Add / Find / Remove work in time O(log(N))
+        T should implement IComparable<T>
+	Set<T>
+	    A set based on hash-table (no duplicates)
+	    Add / Find / Remove work in time O(1)
+	    Like .NET’s HashSet<T>
+	OrderedSet<T>
+	    A set based on balanced search tree (red-black)
+	    Add / Find / Remove work in time O(log(N))
+	    Like .NET’s SortedSet<T>
+	    Provides fast .Range(from, to) operation*
+    MultiDictionary<TKey,TValue>
+        A dictionary (map) implemented by hash-table
+        Allows duplicates (configurable)
+        Add / Find / Remove work in time O(1)
+        Like Dictionary<TKey,List<TValue>>
+    OrderedDictionary<TKey,TValue> / OrderedMultiDictionary<TKey,TValue>
+        A dictionary based on balanced search tree
+        Add / Find / Remove work in time O(log(N))
+        Provides fast .Range(from,to) operation
+    Deque<T>
+        Double-ended queue (deque)
+    BigList<T>
+        Editable sequence of indexed items
+        Like List<T> but provides
+            Fast Insert / Delete operations (at any position)
+            Fast Copy / Concat / Sub-range operations
+        Implemented by the data structure "Rope"
+            Special kind of balanced binary tree: http://en.wikipedia.org/wiki/Rope_(data_structure)
+
+    // Specials    
+    Suffix tree (position tree)
+        Represents the suffixes of given string
+        Used to implement fast search in string
+    Trie (prefix tree)
+        Special tree structure used for
+        fastmulti-pattern matching
+    Rope
+        Balanced tree structure for indexeditems with fast inserts / delete
+        Allows fast string edit operations
+    Interval tree
+        Keeps intervals [a…b] in ordered balanced tree
+        Allows to efficiently find all intervals that overlap with any given interval or point
+    Binary heap, Fibonacci heap
+        Special tree-like data structures
+        toefficiently implement a priority queue
+    Index trees
+        Used to keep sorted indices of database records
+        B-tree, B+ tree, T-tree
+
+    // S Special
+    C5 Collections - nuget paket
+
+
+// Recursion xx?
+
+
+// Combinations - if the order doesn't matter, it is a combination
+	Permutations - the order does matter
+		Less number of available choices each time
+	Variations - with repetitions
+	Variations without Repetition
+
+// Sorting
+	Selection sort
+		Best, worst and average case: n2
+		Memory: 1 (constant, only for the min element)
+		Stable: No
+		Method: Selection
+
+	Bubble sort
+		Best case: n, worst and average case: n2
+		Memory: 1, Stable: Yes, Method: Exchanging
+
+	Insertion sort
+		Best case: n, worst and average case: n2
+		Memory: 1, Stable: Yes, Method: Insertion
+
+	Quicksort
+		Best and average case: n*log(n), worst: n2
+		Memory: log(n) stack space
+		Stable: Depends
+
+	Merge Sort
+		Best, average and worst case: n*log(n)
+		Memory: Depends; worst case is n
+		Stable: Yes;
+
+	Heapsort
+		Best, average and worst case: n*log(n)
+		Memory: Constant - O(1)
+		Stable: No
+
+	...
+
+// Searching
+	Linear Search
+		Worst and average performance: O(n)
+
+	Binary Search - for sorted
+		Average performance: O(log(n))
+
+	Interpolation Search - sorted
+		Average case: log(log(n)), Worst case: O(n)
+
+// Shuffling
+	Randomize the order
+
+	public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+	{
+	    var array = source.ToArray();
+	    var n = array.Length;
+	    for (var i = 0; i < n; i++)
+	    {
+	        // Exchange a[i] with random element in a[i..n-1]
+	        int r = i + RandomProvider.Instance.Next(0, n - i);
+	        var temp = array[i];
+	        array[i] = array[r];
+	        array[r] = temp;
+	    }
+	    return array;
+	}
+
+	public static class RandomProvider
+	{
+	    private static Random Instance = new Random();
+	}
+
+// Graphs
+	External library - QuickGraph
+
+	Dijkstra’s Algorithm - find the shortest path from vertex A to all other vertices
+
+// Regular Expressiona - Regex
+	^ - matches the beginning of input (^T)
+	$ - matches the end of input (y$)
+	* – matched 0 or more times
+	+ – matched 1 or more times
+    ? – matched 0 or 1 times
+    .(dot) – matches any single character except the newline character
+	.* - Matches any whole string
+	| – Matches one pattern or the other: T|A = T or A
+	[xyz] – Matches any one of the enclosed characters, not all 
+	[x-z] – Matches any one between the characters range
+		[A-Z] - big letters
+		[0-9] - num
+	[^xy] – everything except x, y
+	{Number} - matches exactly N occurrences
+		[A-z]{5} - vseki 5 purvi bukvi ot vsqka duma
+	{N, M} – matches at least N and at most M 	
+    \s – matches a single white space character, including space, tab, form feed, line feed
+    \S– matches a single character other than white space
+    \d – matches a digit character
+        Equivalent to [0-9]
+    \D – matches any non-digit character
+        Equivalent to [^0-9]
+    \w – matches any alphanumeric character including the underscore
+    \W – matches any non-alphanumeric or underscore character
+
+
+/// DataBAses
+
+// JSON
+	JSON.NET is a library for parsing JSON in .NET
+	    Has better performance than the JavaScriptSerializer
+	    Provides LINQ-to-JSON
+	    Has an out-of-the-box support for parsing between JSON and XML
+
+    Install:
+    	Package Manager Console - $ Install-Package Newtonsoft.Json
+
+	JSON.NET has two primary methods:
+	    Serialize an object:
+		var jsonObj = JsonConvert.SerializeObject(obj);
+	    Deserialize an object:
+		var copy = JsonConvert.DeserializeObject<ObjType>(jsonObj);
+
+	To indent the output string use 
+		JsonConvert.SerializeObject(place, Formatting.Indented);
+
+    Deserializing to anonymous types:
+    	var json = @"{ 
+               ""fname"": ""Doncho"",
+               ""lname"": ""Minkov"",
+               ""occupation"": ""Technical Trainer"" 
+             }";
+		var template = new 
+		{ FName  = "", LName = "", Occupation = "" };
+		var person = JsonConvert.DeserializeAnonymousType(json, template);
+
+	Attributes:
+	    [JsonProperty(...)] tells the parser that Username is user in the JSON
+	    [JsonIgnore] tells the parser to skip the property Password
+
+	    public class User
+		{
+			[JsonProperty("user")]
+			public string Username { get; set; }
+
+			[JsonIgnore]
+			public string Password { get; set; }
+		}
+
+	LINQ-to-JSON
+		var jsonObj = JObject.Parse(json);
+		Console.WriteLine("Places in {0}:", jsonObj["name"]);
+		jsonObj["places"].Select(
+		   pl => 
+		       string.Format("{0}) {1} ({2})",
+		                     index++,
+		                     pl["name"],
+		                     string.Join(", ",  
+		                             pl["categories"].Select(
+		                               cat => cat["name"]))))
+		                 .Print();
+
+    XML to JSON
+     	string jsonFromXml = JsonConvert.SerializeXNode(doc);
+
+ 	JSON to XML
+ 		XDocument xmlFromJson = JsonConvert.DeserializeXNode(json);
+
+
+/// db xx?
+	Primary Key - column of the table that uniquely identifies its rows (usually a number)
+		Identity to implement auto-increment
+		Right click on the "arrow"? - Set Primary Key
+
+	Relationships - between tables are based on interconnections: primary key / foreign key
+		one-to-many - foreign key to another table - country / towns
+		Many-to-many – Implemented through additional table - student / course
+		One-to-one – Used to model inheritance between tables- human / student
+			primary and foreign key in the same time
+
+		Self-Relationships - employees in a company have a manager, who is also an employee
+
+	Normalization of the relational schema - removes repeating data
+		keyword does not repeat - but its key to another table
+		Every repeating thing is another table - Categories, Towns...
+
+	Integrity constraints - ensure data integrity in the database tables, data rules
+	rimary key constraint - Ensures that the primary key of a table has unique value for each table row
+	Unique key constraint - ensures that all values in a certain column (or a group) are unique
+	Foreign key constraint - Ensures that the value in given column is a key from another table
+	Check constraint - some our logic - 
+		(hour >= 0) AND (hour < 24), name = UPPER(name)
+
+
+	Indices - speed up searching of values in a certain column or group of columns 
+		Can be built-in the table (clustered) or stored externally (non-clustered)
+		Adding and deleting records in indexed tables is slower!
+		Should be used for big tables only (e.g. 50 000 rows)
+
+
+//SQL (Structured Query Language)
+	SQL-99 is currently in use in most databases
+	Files - db is 2 files - .mdf and .ldf
+
+    DDL – Data Definition Language
+        CREATE, ALTER, DROP commands
+    DML – Data Manipulation Language
+        SELECT, INSERT, UPDATE, DELETE commands
+    Example of SQL SELECT query:
+		SELECT Towns.Name, Countries.Name
+		FROM Towns, Countries
+		WHERE Towns.CountryId = Countries.Id
+
+
+    Stored procedures (database-level procedures)
+        Consist of SQL-like code stored in the database
+        Code executed inside the database server
+        Much faster than an external code
+        Data is locally accessible
+        Can accept parameters
+        Can return results
+            Single value
+            Record sets
+        Written in a language extension of SQL
+		    T-SQL – in Microsoft SQL Server
+		    PL/SQL – in Oracle
+
+    Views - named SQL SELECT queries which are used as tables, simplify data access, permissions
+    	Create:
+    		CREATE VIEW V_BGCompanies AS
+			  SELECT
+			    Companies.Id AS Id,
+			    Companies.Company AS Company
+			  FROM Companies INNER JOIN
+			    (Towns INNER JOIN Countries ON
+			     Towns.CountryId = Countries.Id)
+			    ON Companies.TownId = Towns.Id
+			  WHERE
+			    Countries.Country = "Bulgaria";
+
+    Triggers - special stored procedures that are activate when some event occurs
+        When inserting a record, When changing a record, When deleting a record
+    	Can perform additional data processing of the affected rows, e.g.
+        To change the newly added data, To maintain logs and history
+
+        CREATE TABLE Companies(
+		  Id number NOT NULL,
+		  Name varchar(50) NOT NULL)
+
+		  A trigger that appends "Ltd." at the end of the name of a new company:
+
+		CREATE OR REPLACE TRIGGER trg_Companies_INSERT
+		  BEFORE INSERT ON Company
+		  FOR EACH ROW
+		BEGIN
+		  :NEW.Name := :NEW.Name || ' Ltd.';
+		END;
+
+	Transactions - a sequence of db operations which are executed as a single unit		
+    	Either all of them execute successfully or none of them is executed at all
+    	Guarantee the consistency and the integrity of the database
+    	Final when COMMIT is successfully executed
+    	All changes done in the transaction can be cancelled by executing ROLLBACK
+
+	Data Types in SQL Server		
+	    Numeric
+	        bit (1-bit), integer (32-bit), bigint (64-bit)
+	        float, real, numeric(scale, precision)
+	        money – for money (precise) operations
+	    Strings
+	        char(size) – fixed size string
+	        varchar(size) – variable size string
+	        nvarchar(size) – Unicode variable size string
+	        text/ntext – text data block (unlimited size)
+	    Binary data
+	        varbinary(size) – a sequence of bits
+	        image – a binary block up to 1 GB
+	    Date and time
+	        datetime – date and time starting from 1.1.1753 to 31.12. 9999, a precision of 1/300 sec.
+	        smalldatetime – date and time (1-minute precision)
+        Other types
+		    timestamp – automatically generated number whenever a change is made to the data row
+		    uniqueidentifier – GUID identifier
+		    xml – data in XML format 
+
+    	Nullable and NOT NULL types
+	        All types in SQL Server may or may not allow NULL values
+	    Primary key columns
+	        Define the primary key
+	    Identity columns
+	        Automatically increased values when a new row is inserted (auto-increment values)
+	        Used in combination with primary key
+
+    Creating a New Database
+    	In Object Explorer we go to the "Databases" and choose "New Database…" from the context menu 
+		In the "New Database" window enter the name of the new database and click [OK]
+
+		Table
+			Name - in Properities window?
+			Defining an identity columns - means that the values in a certain column are auto generated (for int columns)
+	    	-cannot be assigned manually
+			    Identity Seed – the starting number from which the values in the column begin to increase.
+			    Identity Increment – by how much each consecutive value is increased
+
+	    Creating Relationships
+	    	One-to-many relationship drag the foreign key column onto the other table
+				Drag from the child table to the parent table 
+			Self-relationship can be created by dragging a foreign key onto the same table 
+
+	Naming		
+	    Tables
+	        Each word is capitalized (Pascal Case)
+	        In English, plural
+	        Examples: Users, PhotoAlbums, Countries
+	    Columns
+	        In English, singular
+	        Each word is capitalized (Pascal Case)
+	        Avoid reserved words (e.g. key, int, date)
+	        Examples: FirstName, OrderDate, Price
+	    Primary key
+	        Use "Id" or name_of_the_table + "Id"
+	        Example: in the Users table the PK column should be be called Id or UserId
+	    Foreign key
+	        Use the name of the referenced table + "Id"
+	        Example: in the Users table the foreign key column that references the Groups table should be named GroupId       
+	    Relationship names (constraints)
+	        In English, Pascal Case
+	        "FK_" + table1 + "_" + table2
+	        For example: FK_Users_Groups
+	    Index names
+	        "IX_" + table + column
+	        For example: IX_Users_UserName
+
+
+	// SQL examples
+		SELECT FirstName, LastName, JobTitle FROM Employees
+
+		SELECT * FROM Projects WHERE StartDate = '1/1/2006'
+
+		INSERT INTO Projects(Name, StartDate)
+		VALUES('Introduction to SQL Course', '1/1/2006')
+
+		UPDATE Projects
+		SET EndDate = '8/31/2006'
+		WHERE StartDate = '1/1/2006'
+
+		DELETE FROM Projects
+		WHERE StartDate = '1/1/2006'
+
+		// new column with name Bonus
+		SELECT FirstName, LastName, Salary,
+		Salary * 0.2 AS Bonus FROM Employees
+
+		// [ ] for 2 words name
+		SELECT FirstName + ' ' + LastName AS [Full Name],
+		EmployeeID as [No.] FROM Employees
+
+		// escaping
+		SELECT FirstName + '''s last name is ' +
+		LastName AS [Our Employees] FROM Employees
+
+		// Eliminate duplicate rows 
+		SELECT
+		DISTINCT DepartmentID
+		FROM Employees
+
+		// Union NTERSECT/EXCEPT  ??
+		SELECT FirstName AS Name
+		FROM Employees
+		UNION
+		SELECT LastName AS Name
+		FROM Employees
+
+		// Where
+		SELECT LastName, Salary FROM Employees
+		WHERE Salary <= 20000
+
+		// Between
+		SELECT LastName, Salary FROM Employees
+		WHERE Salary BETWEEN 20000 AND 22000
+
+		// IN / NOT IN
+		SELECT FirstName, LastName, ManagerID FROM
+		Employees WHERE ManagerID IN (109, 3, 16)
+
+		// LIKE operator to specify a pattern:
+		// % means 0 or more chars; _ means one char
+		SELECT FirstName FROM Employees WHERE FirstName LIKE 'S%'
+
+		// NULL/ NOT NULL
+		SELECT LastName, ManagerId FROM Employees
+		WHERE ManagerId IS NOT NULL
+
+		//Using NOT, OR and AND operators and brackets:
+		SELECT FirstName, LastName FROM Employees
+		WHERE
+		    (ManagerID = 3 OR ManagerID = 4) AND
+		    (Salary >= 20000 OR ManagerID IS NULL)
+
+	    // Sorting with ORDER BY
+	    SELECT LastName, HireDate FROM
+		Employees ORDER BY HireDate
+
+		//Descending order
+		SELECT LastName, HireDate FROM
+		Employees ORDER BY HireDate DESC
+
+		// Join
+		SELECT e.EmployeeID, e.LastName, e.DepartmentID, 
+		       d.DepartmentID, d.Name AS DepartmentName
+		FROM Employees e 
+		  INNER JOIN Departments d 
+		    ON e.DepartmentID = d.DepartmentID
+
+    	SELECT e.EmployeeID, e.LastName, e.DepartmentID, 
+		       d.DepartmentID, d.Name AS DepartmentName
+		FROM Employees e, Departments d 
+		WHERE e.DepartmentID = d.DepartmentID
+
+		// Inner join
+		// A join of two tables returning only rows matching the join condition
+		SELECT e.LastName EmpLastName,
+		       m.EmployeeID MgrID, m.LastName MgrLastName
+		FROM Employees e INNER JOIN Employees m
+		  ON e.ManagerID = m.EmployeeID
+
+	  	// Three-Way Joins
+	  	SELECT e.FirstName, e.LastName,
+		t.Name as Towns, a.AddressText
+		FROM Employees e
+		JOIN Addresses a
+		ON e.AddressID = a.AddressID
+		JOIN Towns t
+		ON a.TownID = t.TownID
+
+		// Self-join - means to join a table to itself
+		SELECT e.FirstName + ' ' + e.LastName +
+		' is managed by ' + m.LastName as Message
+		FROM Employees e JOIN Employees m
+		ON (e.ManagerId = m.EmployeeId)
+
+		// Join + condition
+		SELECT e.EmployeeID, e.LastName, e.DepartmentID, 
+		       d.DepartmentID, d.Name AS DepartmentName
+		FROM Employees e 
+		  INNER JOIN Departments d 
+		    ON e.DepartmentID = d.DepartmentID
+		WHERE d.Name = 'Sales'
+
+		// Join with Boolean expression
+		SELECT e.FirstName, e.LastName, d.Name as DeptName
+		FROM Employees e
+		INNER JOIN Departments d
+		ON (e.DepartmentId = d.DepartmentId
+		AND e.HireDate > '1/1/1999'
+		AND d.Name IN ('Sales', 'Finance'))
+
+
+		// Inserting Data
+		INSERT INTO EmployeesProjects VALUES (229, 25)
+
+		INSERT INTO Projects(Name, StartDate)
+		VALUES ('New project', GETDATE())
+
+		INSERT INTO Projects(Name, StartDate)
+		  SELECT Name + ' Restructuring', GETDATE()
+		  FROM Departments
+
+	  	INSERT INTO EmployeesProjects VALUES
+		(229, 1),
+		(229, 2),
+		(229, 3)
+
+		// Delete
+		DELETE FROM Employees WHERE EmployeeID = 1
+
+		// Delete all table
+		TRUNCATE TABLE Users
+
+		// Delete records from tables based on condition from joined tables
+		DELETE FROM Employees
+		FROM Employees e 
+		  JOIN Departments d
+		    ON e.DepartmentID = d.DepartmentID
+		WHERE d.Name = 'Sales'
+
+		// Nested SELECT 
+		SELECT FirstName, LastName, Salary
+		FROM Employees
+		WHERE Salary = 
+		  (SELECT MAX(Salary) FROM Employees)
+
+	  	// EXISTS operator in SELECT statements
+	  	// Find all employees with managers from the first department
+	  	SELECT FirstName, LastName, EmployeeID, ManagerID
+		FROM Employees e
+		WHERE EXISTS
+		  (SELECT EmployeeID
+		   FROM Employees m
+		   WHERE m.EmployeeID = e.ManagerID
+		     AND m.DepartmentID = 1)
+
+     	// Group Functions in SQL 	
+	    COUNT(*) – count of the selected rows
+	    SUM(column) – sum of the values in given column from the selected rows
+	    AVG(column) – average of the values in given column
+	    MAX(column) – the maximal value in given column, works with int string....
+	    MIN(column) – the minimal value in given column
+
+	    SELECT
+		  AVG(Salary) [Average Salary],
+		  MAX(Salary) [Max Salary],
+		  MIN(Salary) [Min Salary],
+		  SUM(Salary) [Salary Sum]
+		FROM Employees
+		WHERE JobTitle = 'Design Engineer'
+
+		// Number of rows with non-null values
+		SELECT COUNT(ManagerID) MgrCount,
+		  COUNT(*) AllCount
+		FROM Employees
+		WHERE DepartmentID = 16
+
+		// Number of rows + nulls
+		SELECT COUNT(*) Cnt FROM Employees
+		WHERE DepartmentID = 3
+
+		// Find the earliest hired employee for each department
+		SELECT e.FirstName, e.LastName, e.HireDate, d.Name
+		FROM Employees e 
+		  JOIN Departments d
+		    ON e.DepartmentID = d.DepartmentID
+		WHERE e.HireDate = 
+		  (SELECT MIN(HireDate) FROM Employees 
+		   WHERE DepartmentID = d.DepartmentID)
+
+	   	// Grouping data by several columns
+	   	SELECT DepartmentID, JobTitle, 
+		  SUM(Salary) as Salaries, COUNT(*) as Count
+		FROM Employees
+		GROUP BY DepartmentID, JobTitle
+
+		// HAVING works like WHERE but is used for the grouping functions
+		SELECT DepartmentID, COUNT(EmployeeID) as
+		  Count, AVG(Salary) AverageSalary
+		FROM Employees
+		GROUP BY DepartmentID
+		HAVING COUNT(EmployeeID) BETWEEN 3 AND 5
+
+		// do "Advanced SQL" slide 20 nz dali da produljavam
+
+
+	// Stored Procedures
+		"Transact-SQL" - 27
+
+	// Triggers = Events
+	// User-Defined Functions
+
+
+	// ADO.NET
+		LINQ-to-SQL is 
+		ORM - object - relational mapping - Entity Framework
+			Pravi ot db v obekti i obratnoto
+
+
+	/// Entity Framework
+		Entity Framework video 0.36.00 - suzdavane na ef db first
+		DbSet- warp na tablica
+		1.10.30 - linq trqbva da e s expression, ne func
+			func 6te sa za list, a ne IQuereable
+		Select na LINQ zaqvkata - posleden, za da imame intelisence za celiq obekt
+		ToList(), FirstOrDefault(), Any(), All() - togava se pravi zaqvkata v db
+		1.47.00 - namirane na gre6kata ot validaciq v db
+		2.35.00 - zaqvka po-slojna, GroupBy, Key... 
+
+		// Adding new object(row)
+			Order order = new Order()
+			{
+			  OrderDate = DateTime.Now, ShipName = "Titanic",
+			  ShippedDate = new DateTime(1912, 4, 15),
+			  ShipCity = "Bottom Of The Ocean"
+			};
+			// Mark the object for inserting
+			context.Orders.Add(order);
+			context.SaveChanges();
+
+		// Delete
+			Order order = northwindEntities.Orders.First();
+			northwindEntities.Orders.Remove(order);
+			northwindEntities.SaveChanges();
+
+				Delete sus command string e po-burzo za mnogo obekti ednovremenno
+					//FAST
+					NorthwindEntities northwindEntities = new NorthwindEntities();
+					northwindEntities.Database.ExecuteSqlCommand(
+					  "DELETE FROM Categories WHERE CategoryID = {0}", 46);
+
+					//SLOW
+					NorthwindEntities northwindEntities = new NorthwindEntities();
+					var category = northwindEntities.Categories.Find(46);
+					northwindEntities.Categories.Remove(category);
+					northwindEntities.SaveChanges();
+
+		// One joined query - one query from 2 tables
+			var towns = db
+				.Towns
+				.Where(t => t.Addresses.Any())
+				.Select(t => new
+				{
+					t.Name,
+					Adresses = t.Addresses.Select(a => a.AdressText)
+				})
+				.ToList();
+ 
+		// ne mojem da polzvame na6ite partial extensanite v LINQ
+			Mojem, no sled kato sme dali ToList()...
+			NE vaji za CODE FIRST
+
+		// Update 
+			Vzimame oreginala (s LINQ), promenqme go, davame db.SaveChanges();
+			Samo pri update~ teglim celiq obekt, ina4e sus Select vzimame samo nujnata ni inf, ne cqlata ot obekta.
+			Pri promqna na selected new object, ne mojem da updeitvame
+
+
+	// Entity Framework Performance [HD, 720p]
+		video 0.02.12 - SQL server Profiler
+
+
+	/// Entity Framework CODE FIRSTS
+		Blank Solution -> Lybrary with name [Project].Models
+		Primary Key = prop Id or [Class name]Id
+		Za guid p Key - prazen construkt 0.25.18:
+			public class Album
+			{
+				public Album()
+				{
+		 			this.Id = Guid.NewGuid();
+				}
+
+				public Guid Id { get; set; }
+			...
+
+		Enum v db sa samo 4isla
+		0.44.40 - vsi4ki Virtual ef gi vuzpriema kato vruzka kum druga tablica
+			private IColection<Song> songs;
+			...
+			public virtual IColection<Song> Songs 
+			{ 
+				get { return this.songs; } 
+				set { this.songs = value; }
+			}
+
+			// i v prazniq construktor inicializaciq na kolekciqta
+			// ne e hubavo da imame inicializ na virtual pole v construkt
+			this.songs = new HashSet<Songs>();
+
+		Ne e zle da slojim v Songs osven prop Album, i prop AlbumId za burzo tursene
+		Example
+			public class Post
+			{
+			    private ICollection<PostAnswer> answers;
+			    public Post()
+			    {
+			        this.answers = new HashSet<PostAnswer>();
+			    }
+			    // ...
+			    public virtual ICollection<PostAnswer> Answers
+			    {
+			        get { return this.answers; }
+			        set { this.answers = value; }
+			    }
+			    public PostType Type { get; set; }
+			}
+
+
+		Sled naprava na modelite New Project -Library [Name].Data
+		Class [Name]DbContext
+		Install EF - ~1.00.00
+		Class [Name]DbContext : DbContext
+		Example
+			using System.Data.Entity;
+			using CodeFirst.Models;
+			...
+			public class ForumContext : DbContext
+			{
+				public ForumContext()
+					:base("SomeName")  // SomeName i v conection stringa
+				{
+				}
+
+			    public DbSet Categories { get; set; }
+
+			    public DbSet Posts { get; set; }
+
+			    public DbSet PostAnswers { get; set; }
+
+			    public DbSet Tags { get; set; }
+			}
+
+
+		New Project - console, web...
+		Kak da referirame ve4e izteglen NuGet Paket - 1.16.16
+		Connection String - pri run-va6tiq proekt (ili na vsqkude)
+			App.config file - ot po glavnite (ne nestnati):
+				<connectionStrings>
+					<add name="DefaultConnection" connectionString="Data Source=.;Initial Catalog=FileUploadSystem;Integrated Security=True" providerName="System.Data.SqlClient" />
+				</connectionStrings>
+
+
+		Enble Migrations - ako promenim db shemata da ne dava error a da rebuildne nova db
+			pi6em Package manage console v Quick Search-a gore v dqsnp na VS
+			Selectvam defoult project - [].Data (kudeto e db context)
+			pi6em "Enable-Migrations"
+			papka Migrations trqbva da se e suzdala - v [].Data
+			mojem da iztriem faila s stranen nomer za ime 1.49.00
+
+			Seed method - populva na4alni danni v db, nqma nujda ot SaveChanges();
+				polzvame AddOrUpdate, ne Add:
+					context.Tags.AddOrUpdate(new Tag { Text = "срок" });
+
+			Dobavqme v run point na programat, options kak da migrira db 1.58.00
+				Database.SetInitializer(
+				  new MigrateDatabaseToLatestVersion
+				    <ForumContext, Configuration>());
+
+		    Pozvolqvame triene na danni pri migraciq/promqna - 2.08.22
+		    	dobavqme v Configuration (public !) 
+		    		this.AutomaticMigrationsEnabled = true;
+    				this.AutomaticMigrationDataLossAllowed = true;
+
+			Relaciq 1 kum 1 - 2.50.50
+
+
+		Validaciq na danni - Google entity framework attributes
+			2.24.00 - slojno debugvane na gre6ka
+			v [].Models referirame:
+				using System.ComponentModel.DataAnnotations;
+
+			[Key] - ako prim key ne ni e Id ili [class]Id
+			[Required] - bez null
+			[DefaultValue(something)] - po-dobre v konstruktora
+			[MinLenght(x)] / [MaxLenght(x)]
+			[Range(0, 150)]
+			[NotMapped] - ne vliza v db
+			[ComplexType] - mergva se s tablicata koqto q referira
+			[Column("x")] - preimenuva defoult kolona koqto ef 6te suzdade
+			[Table("x")] - za clasove
+			[index] - po-burzo tursene, po-bavno dobavqne
+			[InverseProperty("x")] - x = class-ut za koito stava duma
+
+			2.56.00 - o6te na4ini za validaciq - ne s atributi
+
+
+		Repository Pattern
+			db contexta da stane testvaem
+
+			Prawim interface za konkretniq ni interface 3.17.05 + polezen method
+				IArtistDbContext
+			Interface za repository-to - 3.19.06
+				sus Add, Update, SaveChanges...
+			3.30.18 - ot kude mojem da si go copy/paste-nem
+			3.34.08 - memmory repo - vmesto db
+
+	/// Бързодействие в базите данни (Ники)
+		0.33.09 - nastroika na db
+		0.48.56 - 
+		...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// ??
+
+// Suzdava kolekciq s 1,2,3...
+Enumerable.Range(1, 10); 
+
+
+Integrated Development Environments (IDEs)
+
+//Ibm security scan - checkva web proekt za security holesccc
+
+// Generic method koito priema LINQ
+	//2015 SOLID и други принципи [HD, 720p].mp4 - 2.13.00
+
+	private IEnumerable<Student> OrderByExpression<TCondition>(Func<Student, TCondition> expression)
+	{
+		If(this.students.Any())
+		{
+			throw new InvalidOperationExeception("There are no students to sort");
+		}
+
+		var copiedStudents = new HashSet<Students>(this.students);
+		var result = copiedStudents.OrderBy(expression);
+		return result
+	}
+
+	//Example
+	public IEnumerable<Student> OrderByMark()
+	{
+		return this.OrderByExpression(st => st.Mark);
+	}
+
+	public IEnumerable<Student> OrderByFirstName()
+	{
+		//return this.OrderByExpression<string>(st => st.FirstName);  // string moje da ne e nujno
+		return this.OrderByExpression(st => st.FirstName);
+	}
+
+
+// Entity Framework video 0.59.00 - za6to mi lagva generate bg people db-to
+	code first 3.09.15 - ako izklu4a nqkoi ne6ta 6te stane po-burzo
+
+
+// partial class - edin class v 2 ili pove4e faila
+	Ako ediniq ne mojem da promenqme, v drug moje da dobavqme funkcionalnost
+
+// Ako v anonimen obekt se slaga prop ot drug obekt, moje da ne mu slagame ime, to 6te adoptne imeto na propertito
+	var koko = new
+	{
+		Name = some.Name
+	};
+	// E su6toto kato
+	var moko = new
+	{
+		some.Name
+	};
+
+// LINQPad - free~ programa za razglejdane na db s linq
+
+// dependance inversion e su6toto kato inversion of control - podavat ni se nujnite ILogger...
+
+// CLI = Console Line interface
+
+// ICollection - ima index
+
+// Inicialize obj s prazen costruct
+	var ba = 
+		new BankAccount
+		{
+			Name = "Pesho",
+			Money = 0
+		};
+
+// video Mocking with Moq and JustMock (Ники) [HD, 720p] 2015  0.24.00 - unit test solution
+
+// MVC do 1.03.40 sum
+
+<connectionStrings>
+    <!-- connectionString="Data Source=(LocalDb)\v11.0;;AttachDbFilename=|DataDirectory|\aspnet-TicketingSystem.Web-20141113112552.mdf -->
+    <add name="DefaultConnection" connectionString="Data Source=.;Initial Catalog=TicketingSystem;Integrated Security=True" providerName="System.Data.SqlClient" />
+</connectionStrings>
+
+
+// KPK 
+ctrl + e + d - format code
+
+Zadurjan alt + nadolu s mi6kata - moje da pi6em po koloni, nq nqkolko reda
+
+Ditto - pograma za copy/paste - clipboard
+
+polimorfizum vmesto enum
+
+View - Task List - TODO tata se pokazvat tam v vs
+
+Ctrl + M + O = vsi metodi se minimizirat - s +4etas
+
+2.03.00 - ? command patern? - Niki Подготовка за изпит по КПК (задача Computers) (Ники) [HD, 720p]
+
+2.09.40 - template method patern - base method = (protected) abstract -> naslednicite override
+
+2.24.00 - new unit tests project
+	+ da napravi da se vijdat internal ne6tata ot testovete
+
+2.38.00 - composite - kogato clasa moje da ima kolekciq ot elementi kato sebe si
+
+2.58.00 - kogata 2 clasa sa copuln-ati pomejdu si - moje da gi copulnem s mediatora
+	cpu govori s mainborda, ne direkto s ram
+
+3.34.00 - (predi tozi 4as) napravi simple factori v zavisimust ot string - ni dava razli4en klass
+
+4.15.00 - diff check proverka bez code v programata, console in from file out in file
+	v conzolata v papka bin/Debug -> program.exe < in.txt > out.txt
+
+//1.27.00
